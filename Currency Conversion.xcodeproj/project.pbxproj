@@ -11,6 +11,8 @@
 		4D55AC292A93326E00B77E10 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55AC282A93326E00B77E10 /* ViewController.swift */; };
 		4D55AC2E2A93327700B77E10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D55AC2D2A93327700B77E10 /* Assets.xcassets */; };
 		4D55AC312A93327700B77E10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D55AC2F2A93327700B77E10 /* LaunchScreen.storyboard */; };
+		4D55AC392A93343100B77E10 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55AC382A93343100B77E10 /* TabBarController.swift */; };
+		4D55AC3F2A933B8100B77E10 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55AC3E2A933B8100B77E10 /* ApiService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		4D55AC2D2A93327700B77E10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4D55AC302A93327700B77E10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4D55AC322A93327700B77E10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D55AC382A93343100B77E10 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		4D55AC3E2A933B8100B77E10 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,13 +56,47 @@
 		4D55AC232A93326E00B77E10 /* Currency Conversion */ = {
 			isa = PBXGroup;
 			children = (
+				4D55AC3A2A9339A600B77E10 /* AppDelegate */,
+				4D55AC3D2A933B2000B77E10 /* Services */,
+				4D55AC3B2A933A0400B77E10 /* Controllers */,
+				4D55AC3C2A933AB800B77E10 /* Resources */,
+			);
+			path = "Currency Conversion";
+			sourceTree = "<group>";
+		};
+		4D55AC3A2A9339A600B77E10 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
 				4D55AC242A93326E00B77E10 /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		4D55AC3B2A933A0400B77E10 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
 				4D55AC282A93326E00B77E10 /* ViewController.swift */,
+				4D55AC382A93343100B77E10 /* TabBarController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4D55AC3C2A933AB800B77E10 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				4D55AC2D2A93327700B77E10 /* Assets.xcassets */,
 				4D55AC2F2A93327700B77E10 /* LaunchScreen.storyboard */,
 				4D55AC322A93327700B77E10 /* Info.plist */,
 			);
-			path = "Currency Conversion";
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4D55AC3D2A933B2000B77E10 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4D55AC3E2A933B8100B77E10 /* ApiService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,7 +169,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D55AC392A93343100B77E10 /* TabBarController.swift in Sources */,
 				4D55AC292A93326E00B77E10 /* ViewController.swift in Sources */,
+				4D55AC3F2A933B8100B77E10 /* ApiService.swift in Sources */,
 				4D55AC252A93326E00B77E10 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
