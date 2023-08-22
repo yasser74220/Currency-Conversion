@@ -15,6 +15,8 @@
 		4D55AC392A93343100B77E10 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55AC382A93343100B77E10 /* TabBarController.swift */; };
 		4D55AC3F2A933B8100B77E10 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55AC3E2A933B8100B77E10 /* ApiService.swift */; };
 		4D8F3EBD2A94C6FF001454DC /* PairConversionDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8F3EBC2A94C6FF001454DC /* PairConversionDataModel.swift */; };
+		4D8F3EC12A94E50F001454DC /* CurrencyConversionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8F3EC02A94E50F001454DC /* CurrencyConversionViewModel.swift */; };
+		4D8F3EC42A94E596001454DC /* CurrencyConversionRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8F3EC32A94E596001454DC /* CurrencyConversionRepo.swift */; };
 		A6749BCC821343C980DF9E06 /* Pods_Currency_Conversion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4050EEE7F5F41E3D5230072B /* Pods_Currency_Conversion.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +33,8 @@
 		4D55AC382A93343100B77E10 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4D55AC3E2A933B8100B77E10 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		4D8F3EBC2A94C6FF001454DC /* PairConversionDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairConversionDataModel.swift; sourceTree = "<group>"; };
+		4D8F3EC02A94E50F001454DC /* CurrencyConversionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConversionViewModel.swift; sourceTree = "<group>"; };
+		4D8F3EC32A94E596001454DC /* CurrencyConversionRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConversionRepo.swift; sourceTree = "<group>"; };
 		F74D41E092703542F19368E5 /* Pods-Currency Conversion.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Currency Conversion.release.xcconfig"; path = "Target Support Files/Pods-Currency Conversion/Pods-Currency Conversion.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,7 +62,7 @@
 		4D33D40A2A9380210018458C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4D33D40C2A9381180018458C /* CurrencyConversionViewController.xib */,
+				4D33D40B2A9381180018458C /* CurrencyConversionViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -86,10 +90,12 @@
 			children = (
 				4D55AC322A93327700B77E10 /* Info.plist */,
 				4D55AC3A2A9339A600B77E10 /* AppDelegate */,
+				4D55AC3D2A933B2000B77E10 /* Networking */,
+				4D8F3EC22A94E525001454DC /* Repositories */,
+				4D8F3EBE2A94E3A2001454DC /* Screens */,
 				4D55AC402A9346E600B77E10 /* Models */,
 				4D33D40A2A9380210018458C /* Views */,
-				4D55AC3B2A933A0400B77E10 /* Controllers */,
-				4D55AC3D2A933B2000B77E10 /* Services */,
+				4D55AC3B2A933A0400B77E10 /* ViewModel */,
 				4D55AC3C2A933AB800B77E10 /* Resources */,
 			);
 			path = "Currency Conversion";
@@ -103,30 +109,30 @@
 			path = AppDelegate;
 			sourceTree = "<group>";
 		};
-		4D55AC3B2A933A0400B77E10 /* Controllers */ = {
+		4D55AC3B2A933A0400B77E10 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				4D33D40B2A9381180018458C /* CurrencyConversionViewController.swift */,
-				4D55AC382A93343100B77E10 /* TabBarController.swift */,
+				4D8F3EC02A94E50F001454DC /* CurrencyConversionViewModel.swift */,
 			);
-			path = Controllers;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		4D55AC3C2A933AB800B77E10 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4D55AC382A93343100B77E10 /* TabBarController.swift */,
 				4D55AC2D2A93327700B77E10 /* Assets.xcassets */,
 				4D55AC2F2A93327700B77E10 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		4D55AC3D2A933B2000B77E10 /* Services */ = {
+		4D55AC3D2A933B2000B77E10 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 				4D55AC3E2A933B8100B77E10 /* ApiService.swift */,
 			);
-			path = Services;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		4D55AC402A9346E600B77E10 /* Models */ = {
@@ -135,6 +141,30 @@
 				4D8F3EBC2A94C6FF001454DC /* PairConversionDataModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		4D8F3EBE2A94E3A2001454DC /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				4D8F3EBF2A94E3CB001454DC /* CurrencyConversion */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		4D8F3EBF2A94E3CB001454DC /* CurrencyConversion */ = {
+			isa = PBXGroup;
+			children = (
+				4D33D40C2A9381180018458C /* CurrencyConversionViewController.xib */,
+			);
+			path = CurrencyConversion;
+			sourceTree = "<group>";
+		};
+		4D8F3EC22A94E525001454DC /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				4D8F3EC32A94E596001454DC /* CurrencyConversionRepo.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		EC936F29179B7A964702F2FB /* Frameworks */ = {
@@ -263,8 +293,10 @@
 				4D33D40D2A9381180018458C /* CurrencyConversionViewController.swift in Sources */,
 				4D8F3EBD2A94C6FF001454DC /* PairConversionDataModel.swift in Sources */,
 				4D55AC392A93343100B77E10 /* TabBarController.swift in Sources */,
+				4D8F3EC12A94E50F001454DC /* CurrencyConversionViewModel.swift in Sources */,
 				4D55AC3F2A933B8100B77E10 /* ApiService.swift in Sources */,
 				4D55AC252A93326E00B77E10 /* AppDelegate.swift in Sources */,
+				4D8F3EC42A94E596001454DC /* CurrencyConversionRepo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

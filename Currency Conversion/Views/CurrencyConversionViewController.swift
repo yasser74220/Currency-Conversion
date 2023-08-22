@@ -4,22 +4,18 @@
 //
 //  Created by Yasser Mohamed on 21/08/2023.
 //
-
-import UIKit
 import Alamofire
-
+import UIKit
 class CurrencyConversionViewController: UIViewController, UITextFieldDelegate {
-
-
-
-    @IBOutlet weak var amountTextField: UITextField!
-    @IBOutlet weak var sourceTextField: UITextField!
-    @IBOutlet weak var targetTextField: UITextField!
-    @IBOutlet weak var valueLabel: UILabel!
-    @IBOutlet weak var validLabel: UILabel!
+    @IBOutlet var amountTextField: UITextField!
+    @IBOutlet var sourceTextField: UITextField!
+    @IBOutlet var targetTextField: UITextField!
+    @IBOutlet var valueLabel: UILabel!
+    @IBOutlet var validLabel: UILabel!
     var currencies = ["EUR", "NZD", "GBP"]
     var sourcePickerView = UIPickerView()
     var targetPickerView = UIPickerView()
+    lazy var viewModel = CurrencyConversionViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         sourceTextField.inputView = sourcePickerView
@@ -28,42 +24,18 @@ class CurrencyConversionViewController: UIViewController, UITextFieldDelegate {
         sourcePickerView.dataSource = self
         targetPickerView.delegate = self
         targetPickerView.dataSource = self
-        amountTextField.addTarget(self, action: #selector(validator(textField: )), for: .editingChanged)
-        amountTextField.addTarget(self, action: #selector(fetch(textField: )), for: .allEditingEvents)
-          // Do any additional setup af ter loading the view.
+        amountTextField.addTarget(self, action: #selector(validator(textField:)), for: .editingChanged)
     }
-    @objc func validator ( textField:UITextField){
-        let rgx = NSPredicate(format:"SELF MATCHES %@", "[+-]?([0-9]*[.])?[0-9]+")
-         
-        if (rgx.evaluate(with: textField.text)){
-            validLabel.layer.isHidden = true
-        }
-        else {
-            validLabel.layer.isHidden = false
 
-        }
-    }
-    @objc func fetch (textField:UITextField){
-        fetchCurrency()
-    }
-    
     @IBAction func convertButtonTapped(_ sender: UIButton) {
-        fetchCurrency()
-        print("tappp")
-    }
-    func fetchCurrency() {
-        ApiService.shared.getData(url: "https://v6.exchangerate-api.com/v6/ecf10bab01b34bf0de9636e1/pair/\(sourceTextField.text ?? "")/\(targetTextField.text ?? "")/\(amountTextField.text ?? "")", method: HTTPMethod.get, parameters: [:], encodingType: URLEncoding.default, headers: [:]) { (Response: PairConversion?, Error: Error?) in
-            if let returnedResponse = Response {
-                print(returnedResponse.result)
-                DispatchQueue.main.async {
-                    self.valueLabel.text = String(returnedResponse.conversionResult)
-
-                }
+        guard let source = sourceTextField.text, let target = targetTextField.text, let amount = amountTextField.text else { return }
+        self.viewModel.getConversionResult(amount: amount, source: source, target: target,completion: { value,error in
+            DispatchQueue.main.async {
+                self.valueLabel.text = value
             }
-            else {
-                print(Error as Any)
-            }
-        }
+        } )
+      
+      
     }
 }
 
@@ -73,7 +45,6 @@ extension CurrencyConversionViewController: UIPickerViewDelegate, UIPickerViewDa
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-
         switch pickerView {
         case sourcePickerView:
             return currencies.count
@@ -82,9 +53,8 @@ extension CurrencyConversionViewController: UIPickerViewDelegate, UIPickerViewDa
         default:
             return 1
         }
-
-
     }
+
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView {
         case sourcePickerView:
@@ -94,9 +64,8 @@ extension CurrencyConversionViewController: UIPickerViewDelegate, UIPickerViewDa
         default:
             return ""
         }
-
-
     }
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch pickerView {
         case sourcePickerView:
@@ -106,7 +75,18 @@ extension CurrencyConversionViewController: UIPickerViewDelegate, UIPickerViewDa
             targetTextField.text = currencies[row]
             targetPickerView.resignFirstResponder()
         default: break
+        }
+    }
+}
+extension CurrencyConversionViewController {
+    @objc func validator(textField: UITextField) {
+        let rgx = NSPredicate(format: "SELF MATCHES %@", "[+-]?([0-9]*[.])?[0-9]+")
 
+        if rgx.evaluate(with: textField.text) {
+            validLabel.layer.isHidden = true
+        } else {
+            
+            validLabel.layer.isHidden = false
         }
     }
 }
