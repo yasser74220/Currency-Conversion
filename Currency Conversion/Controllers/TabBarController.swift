@@ -10,19 +10,21 @@ import UIKit
 
 class TabBarController: UITabBarController {
     override func viewDidLoad() {
-        let firstController = ViewController()
-        let secondController = ViewController()
-        let thirdController = ViewController()
+        let firstController = CurrencyConversionViewController()
+        let secondController = CurrencyConversionViewController()
+        let thirdController = CurrencyConversionViewController()
         let viewControllers = [firstController, secondController, thirdController]
         self.setViewControllers(viewControllers, animated: true)
+       
+
         guard let tabBarItems = self.tabBar.items else { return }
-        let unSelectedTabImages = ["arrowshape.right", "heart", "chart.line.uptrend.xyaxis.circle"]
-        let selectedTabImages = ["arrowshape.right.fill", "heart.fill", "chart.line.uptrend.xyaxis.circle"]
+        let unSelectedTabImages = ["coloncurrencysign.circle", "heart.circle", "chart.line.uptrend.xyaxis.circle"]
+        let selectedTabImages = ["coloncurrencysign.circle.fill", "heart.circle.fill", "chart.line.uptrend.xyaxis.circle"]
         for x in 0...2 {
             tabBarItems[x].image = UIImage(systemName: unSelectedTabImages[x])
             tabBarItems[x].selectedImage = UIImage(systemName: selectedTabImages[x])
         }
-        self.tabBar.backgroundColor = .white
-        self.tabBar.tintColor = .green
+         self.tabBar.backgroundColor = .lightGray.withAlphaComponent(0.2)
+        self.tabBar.tintColor = .green.withAlphaComponent(0.8)
     }
 }

@@ -16,6 +16,7 @@ class ApiService {
         AF.request(url, method: method, parameters: parameters, encoding: encodingType, headers: headers).responseDecodable(of: T.self) { response in
             switch response.result {
             case .success(let res):
+                print(res)
                 completion(res, nil)
             case .failure(let error):
                 completion(nil, error)
