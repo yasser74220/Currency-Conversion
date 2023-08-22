@@ -6,36 +6,47 @@
 //
 import Alamofire
 import UIKit
-class CurrencyConversionViewController: UIViewController, UITextFieldDelegate {
+class CurrencyConversionViewController: UIViewController, UITextFieldDelegate  {
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var amountTextField: UITextField!
     @IBOutlet var sourceTextField: UITextField!
     @IBOutlet var targetTextField: UITextField!
     @IBOutlet var valueLabel: UILabel!
     @IBOutlet var validLabel: UILabel!
+    @IBOutlet weak var converterView: UIView!
     var currencies = ["EUR", "NZD", "GBP"]
     var sourcePickerView = UIPickerView()
     var targetPickerView = UIPickerView()
     lazy var viewModel = CurrencyConversionViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
-        sourceTextField.inputView = sourcePickerView
+         amountTextField.layer.cornerRadius = 10
+        sourceTextField.layer.cornerRadius = 10
+         targetTextField.layer.cornerRadius = 10
+        converterView.layer.cornerRadius = 16
+        converterView.layer.shadowColor = UIColor.black.cgColor
+            converterView.layer.shadowOpacity = 0.6
+        converterView.layer.shadowOffset = .zero
+            converterView.layer.shadowRadius = 1
+        converterView.layer.shouldRasterize = true
+            sourceTextField.inputView = sourcePickerView
         targetTextField.inputView = targetPickerView
         sourcePickerView.delegate = self
         sourcePickerView.dataSource = self
         targetPickerView.delegate = self
         targetPickerView.dataSource = self
-        amountTextField.addTarget(self, action: #selector(validator(textField:)), for: .editingChanged)
+        
     }
-
+ 
     @IBAction func convertButtonTapped(_ sender: UIButton) {
         guard let source = sourceTextField.text, let target = targetTextField.text, let amount = amountTextField.text else { return }
-        self.viewModel.getConversionResult(amount: amount, source: source, target: target,completion: { value,error in
+        self.viewModel.getConversionResult(amount: amount, source: source, target: target, completion: { value, error in
             DispatchQueue.main.async {
                 self.valueLabel.text = value
             }
-        } )
-      
-      
+        })
+
+
     }
 }
 
@@ -78,15 +89,4 @@ extension CurrencyConversionViewController: UIPickerViewDelegate, UIPickerViewDa
         }
     }
 }
-extension CurrencyConversionViewController {
-    @objc func validator(textField: UITextField) {
-        let rgx = NSPredicate(format: "SELF MATCHES %@", "[+-]?([0-9]*[.])?[0-9]+")
 
-        if rgx.evaluate(with: textField.text) {
-            validLabel.layer.isHidden = true
-        } else {
-            
-            validLabel.layer.isHidden = false
-        }
-    }
-}
