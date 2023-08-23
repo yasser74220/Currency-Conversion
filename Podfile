@@ -7,5 +7,5 @@ target 'Currency Conversion' do
 
   # Pods for Currency Conversion
   pod 'Alamofire'
-  pod 'DropDown'
+  pod 'iOSDropDown'
 end

@@ -4,89 +4,48 @@
 //
 //  Created by Yasser Mohamed on 21/08/2023.
 //
+
 import Alamofire
+import iOSDropDown
 import UIKit
-class CurrencyConversionViewController: UIViewController, UITextFieldDelegate  {
+class CurrencyConversionViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var amountTextField: UITextField!
-    @IBOutlet var sourceTextField: UITextField!
-    @IBOutlet var targetTextField: UITextField!
-    @IBOutlet var valueLabel: UILabel!
-    @IBOutlet var validLabel: UILabel!
+    @IBOutlet weak var sourceDropDown: DropDown!
+    @IBOutlet weak var targetDropDown: DropDown!
     @IBOutlet weak var converterView: UIView!
-    var currencies = ["EUR", "NZD", "GBP"]
-    var sourcePickerView = UIPickerView()
-    var targetPickerView = UIPickerView()
+    var codes:[String] = []
     lazy var viewModel = CurrencyConversionViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
-         amountTextField.layer.cornerRadius = 10
-        sourceTextField.layer.cornerRadius = 10
-         targetTextField.layer.cornerRadius = 10
+        amountTextField.layer.cornerRadius = 10
         converterView.layer.cornerRadius = 16
         converterView.layer.shadowColor = UIColor.black.cgColor
-            converterView.layer.shadowOpacity = 0.6
+        converterView.layer.shadowOpacity = 0.6
         converterView.layer.shadowOffset = .zero
-            converterView.layer.shadowRadius = 1
-        converterView.layer.shouldRasterize = true
-            sourceTextField.inputView = sourcePickerView
-        targetTextField.inputView = targetPickerView
-        sourcePickerView.delegate = self
-        sourcePickerView.dataSource = self
-        targetPickerView.delegate = self
-        targetPickerView.dataSource = self
+        converterView.layer.shadowRadius = 1
+        viewModel.getCurrencies() { threeCode,countries, error in
+            self.sourceDropDown.optionArray = countries
+            self.targetDropDown.optionArray = countries
+            self.sourceDropDown.text = countries[0]
+            self.targetDropDown.text = countries[1]
+            self.codes = threeCode
+        }
         
     }
  
     @IBAction func convertButtonTapped(_ sender: UIButton) {
-        guard let source = sourceTextField.text, let target = targetTextField.text, let amount = amountTextField.text else { return }
-        self.viewModel.getConversionResult(amount: amount, source: source, target: target, completion: { value, error in
+        guard let source = sourceDropDown.selectedIndex, let target = targetDropDown.selectedIndex, let amount = amountTextField.text else { return }
+        let s = codes[source]
+        let t = codes[target]
+         self.viewModel.getConversionResult(amount: amount, source: s, target: t, completion: { value, error in
             DispatchQueue.main.async {
-                self.valueLabel.text = value
+                sender.titleLabel?.text = value
             }
         })
 
 
     }
 }
-
-extension CurrencyConversionViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        1
-    }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch pickerView {
-        case sourcePickerView:
-            return currencies.count
-        case targetPickerView:
-            return currencies.count
-        default:
-            return 1
-        }
-    }
-
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch pickerView {
-        case sourcePickerView:
-            return currencies[row]
-        case targetPickerView:
-            return currencies[row]
-        default:
-            return ""
-        }
-    }
-
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch pickerView {
-        case sourcePickerView:
-            sourceTextField.text = currencies[row]
-            sourceTextField.resignFirstResponder()
-        case targetPickerView:
-            targetTextField.text = currencies[row]
-            targetPickerView.resignFirstResponder()
-        default: break
-        }
-    }
-}
+ 
 
