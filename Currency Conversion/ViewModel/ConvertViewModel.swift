@@ -1,13 +1,13 @@
 //
-//  CurrencyConversionViewModel.swift
+//  ConvertViewModel.swift
 //  Currency Conversion
 //
-//  Created by Yasser Mohamed on 22/08/2023.
+//  Created by Yasser Mohamed on 23/08/2023.
 //
 
 import Foundation
 
-class CurrencyConversionViewModel: NSObject {
+class ConvertViewModel {
     private var pairCurrencyService: CurrencyConversionRepoProtocol
      var pairConversion: PairConversion?
     
@@ -29,13 +29,10 @@ class CurrencyConversionViewModel: NSObject {
             var countries:[String] = []
             for currency in result.supportedCodes {
                 threeCode.append(currency[0])
-                countries.append(currency[0]+" - "+currency[1])
+                countries.append(currency[0])
             }
             completion(threeCode,countries,nil)
  
         }
     }
-     
-    
-    
 }
