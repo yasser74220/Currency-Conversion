@@ -9,8 +9,9 @@ import UIKit
 import SDWebImage
 class ExchangeRateCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var currecnyLabel: UILabel!
     @IBOutlet weak var exchangeRateLabel: UILabel!
-    @IBOutlet weak var currencyName: UILabel!
+    @IBOutlet weak var currencyCode: UILabel!
     @IBOutlet weak var currencyFlagImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -18,9 +19,10 @@ class ExchangeRateCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
     
-    func setCellData (name:String, value:String, image:String){
+    func setCellData (name:String, value:String, image:String,code:String){
         exchangeRateLabel.text = value
-        currencyName.text = name
+        currecnyLabel.text = name
+        currencyCode.text = code
         currencyFlagImage.sd_setImage(with: URL(string: image))
     }
 

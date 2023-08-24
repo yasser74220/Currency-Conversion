@@ -82,8 +82,9 @@
             </constraints>
             <size key="customSize" width="238" height="50"/>
             <connections>
+                <outlet property="currecnyLabel" destination="KzN-Az-An3" id="jbE-jc-4sS"/>
+                <outlet property="currencyCode" destination="4w3-9Y-bFS" id="sbi-wj-eaa"/>
                 <outlet property="currencyFlagImage" destination="hml-Y8-Ft8" id="RMv-iP-HwA"/>
-                <outlet property="currencyName" destination="4w3-9Y-bFS" id="L13-Ct-Wgq"/>
                 <outlet property="exchangeRateLabel" destination="J4s-Y0-5Nz" id="0ef-Q9-Vvf"/>
             </connections>
             <point key="canvasLocation" x="173.2824427480916" y="20.070422535211268"/>

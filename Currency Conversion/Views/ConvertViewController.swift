@@ -60,11 +60,16 @@ class ConvertViewController: UIViewController {
         exchangeRateCollectionView.register(UINib(nibName: "ExchangeRateHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ExchangeRateHeaderCollectionReusableView")
         exchangeRateCollectionView.dataSource = self
         exchangeRateCollectionView.delegate = self
-     
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        addToFavoritesStackView.addGestureRecognizer(tap)
        
         // Do any additional setup after loading the view.
     }
-
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        let vc = FavoriteViewController() //change this to your class na
+        self.present(vc, animated: true)
+        
+    }
     @IBAction func convertButtonTapped(_ sender: Any) {
                 guard let source = sourceDropDownMenu.text, let target = targetDropDownMenu.text, let amount = amountTextField.text else { return }
              
@@ -94,7 +99,7 @@ extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDel
    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExchangeRateCollectionViewCell", for: indexPath) as! ExchangeRateCollectionViewCell
-        cell.setCellData(name: "United States Dollar", value: "1.4", image: "https://cdn.britannica.com/33/4833-004-828A9A84/Flag-United-States-of-America.jpg")
+        cell.setCellData(name: "United States Dollar", value: "1.4", image: "https://cdn.britannica.com/33/4833-004-828A9A84/Flag-United-States-of-America.jpg",code:  "USD")
      
         return cell
     }
@@ -105,6 +110,7 @@ extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDel
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ExchangeRateHeaderCollectionReusableView", for: indexPath) as! ExchangeRateHeaderCollectionReusableView
+        header.label.text = "My Portofolio"
         return header
     }
 
