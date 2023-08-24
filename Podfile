@@ -8,4 +8,6 @@ target 'Currency Conversion' do
   # Pods for Currency Conversion
   pod 'Alamofire'
   pod 'iOSDropDown'
+  pod 'SDWebImage'
+  pod 'IQKeyboardManagerSwift'
 end

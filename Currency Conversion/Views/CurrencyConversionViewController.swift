@@ -16,12 +16,18 @@ class CurrencyConversionViewController: UIViewController {
     var codes:[String] = []
      override func viewDidLoad() {
         super.viewDidLoad()
-         segmentedControl.layer.cornerRadius = 10
-
+         segmentedControl.layer.cornerRadius = 40
+         segmentedControl.layer.borderWidth = 0.5
+         
          segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .allEvents)
          segmentedControl.selectedSegmentIndex = 0
          displayViewController(ConvertViewController())
 
+    }
+    override func viewDidLayoutSubviews() {
+     
+        segmentedControl.layer.cornerRadius = 50
+        segmentedControl.layer.borderWidth = 0.5
     }
   
  

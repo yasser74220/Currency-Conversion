@@ -1,20 +1,30 @@
 PODS:
   - Alamofire (5.7.1)
   - iOSDropDown (0.4.0)
+  - IQKeyboardManagerSwift (6.5.12)
+  - SDWebImage (5.17.0):
+    - SDWebImage/Core (= 5.17.0)
+  - SDWebImage/Core (5.17.0)
 
 DEPENDENCIES:
   - Alamofire
   - iOSDropDown
+  - IQKeyboardManagerSwift
+  - SDWebImage
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - iOSDropDown
+    - IQKeyboardManagerSwift
+    - SDWebImage
 
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
   iOSDropDown: ce9daa584eaa5567cafc1b633e3cc7eb6d9cea42
+  IQKeyboardManagerSwift: 371b08cb39664fb56030f5345c815a4ffc74bbc0
+  SDWebImage: 750adf017a315a280c60fde706ab1e552a3ae4e9
 
-PODFILE CHECKSUM: a14faa4473190ccedb94c29dba05b5bcd948fde3
+PODFILE CHECKSUM: 1aba62940db23f321d1095449e037b6948053e80
 
 COCOAPODS: 1.12.1

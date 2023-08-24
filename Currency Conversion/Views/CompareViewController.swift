@@ -18,14 +18,26 @@ class CompareViewController: UIViewController {
     @IBOutlet weak var CompareButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        amountTextField.layer.borderWidth = 0.5
+        amountTextField.layer.cornerRadius = 20
+        amountTextField.layer.borderColor = UIColor(red: 197/255.0, green: 197/255.0, blue: 197/255.0, alpha: 1.0).cgColor
+        amountTextField.borderStyle = .none
+
+        firstTargetResultTextField.layer.borderWidth = 0.5
+        firstTargetResultTextField.layer.cornerRadius = 20
+        firstTargetResultTextField.layer.borderColor = UIColor(red: 197/255.0, green: 197/255.0, blue: 197/255.0, alpha: 1.0).cgColor
+        firstTargetResultTextField.borderStyle = .none
+        
+        secondTargetResultTextField.layer.borderWidth = 0.5
+        secondTargetResultTextField.layer.cornerRadius = 20
+        secondTargetResultTextField.layer.borderColor = UIColor(red: 197/255.0, green: 197/255.0, blue: 197/255.0, alpha: 1.0).cgColor
+        secondTargetResultTextField.borderStyle = .none
+        sourceDropDownMenu.borderStyle = .none
+        firstTargetDropDownMenu.borderStyle = .none
+        secondTargetDropDownMenu.borderStyle = .none
+     
         CompareButton.layer.cornerRadius = 25
     }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        firstTargetResultTextField.layer.cornerRadius = 10
-        secondTargetResultTextField.layer.cornerRadius = 10
-        amountTextField.layer.cornerRadius = 10
-    }
+  
 
 }
