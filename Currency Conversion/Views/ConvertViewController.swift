@@ -9,7 +9,7 @@ import UIKit
 import iOSDropDown
 import SDWebImage
 class ConvertViewController: UIViewController {
-  
+    let context = {UIApplication.shared.delegate as! AppDelegate}().persistentContainer.viewContext
     @IBOutlet weak var toImageView: UIImageView!
     @IBOutlet weak var toStackView: UIStackView!
     @IBOutlet weak var fromStackView: UIStackView!
@@ -22,7 +22,7 @@ class ConvertViewController: UIViewController {
     @IBOutlet weak var addToFavoritesStackView: UIStackView!
     lazy var viewModel = ConvertViewModel()
     @IBOutlet weak var exchangeRateCollectionView: UICollectionView!
-    
+    var models = [FavoriteList]()
     override func viewDidLoad() {
         super.viewDidLoad()
         amountTextField.layer.borderWidth = 0.5
@@ -62,7 +62,8 @@ class ConvertViewController: UIViewController {
         exchangeRateCollectionView.delegate = self
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         addToFavoritesStackView.addGestureRecognizer(tap)
-       
+        getItems()
+
         // Do any additional setup after loading the view.
     }
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
@@ -80,14 +81,24 @@ class ConvertViewController: UIViewController {
                 })
         
     }
-
+    func getItems() {
+        do {
+            models = try context.fetch(FavoriteList.fetchRequest())
+            DispatchQueue.main.async {
+                self.exchangeRateCollectionView.reloadData()
+            }
+        }
+        catch {
+            
+        }
+    }
 }
 
 
 extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        models.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -99,7 +110,7 @@ extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDel
    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExchangeRateCollectionViewCell", for: indexPath) as! ExchangeRateCollectionViewCell
-        cell.setCellData(name: "United States Dollar", value: "1.4", image: "https://cdn.britannica.com/33/4833-004-828A9A84/Flag-United-States-of-America.jpg",code:  "USD")
+        cell.setCellData(name: models[indexPath.row].currencyName!, value: models[indexPath.row].currencyCode!, image: "https://cdn.britannica.com/33/4833-004-828A9A84/Flag-United-States-of-America.jpg",code:   models[indexPath.row].currencyName!)
      
         return cell
     }

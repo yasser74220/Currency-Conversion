@@ -8,6 +8,7 @@
 import UIKit
 import SDWebImage
 class FavouriteCollectionViewCell: UICollectionViewCell {
+    var btnTapAction : (()->())?
 
     @IBOutlet weak var favoriteButton: FavoriteButton!
     @IBOutlet weak var currencyCodeLabel: UILabel!
@@ -15,8 +16,16 @@ class FavouriteCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var currencyimage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
+ 
         currencyimage.layer.cornerRadius = 25
+       
+        
     }
+    @IBAction func favoriteButtonTapped(_ sender: FavoriteButton) {
+        btnTapAction?()
+
+    }
+ 
     func setCellData (name:String, value:String, image:String){
         currencyCodeLabel.text = value
         currencyLabel.text = name

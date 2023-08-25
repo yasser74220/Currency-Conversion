@@ -5,48 +5,51 @@
 //  Created by Yasser Mohamed on 24/08/2023.
 //
 
-import UIKit
 import CoreMotion
+import UIKit
 class FavoriteButton: UIButton {
-    
-    
-    
-    var status:Bool = false {
+
+    var status: Bool = false {
         didSet {
-            self.update()
+            update()
         }
     }
-    var filledIcon = UIImage(systemName:"heart.fill")
-    var basicIcon = UIImage(systemName:"heart")
+
+    var filledIcon = UIImage(systemName: "heart.fill")
+    var basicIcon = UIImage(systemName: "heart")
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupViews()
     }
-    
-       
+
+    func setupViews() {
+
+        self.imageView?.image = basicIcon
+        self.setTitle("", for: .normal)
+        self.addTarget(self, action: #selector(toggle), for: .touchUpInside)
+
+
+    }
+
     required init?(coder aDecoder: NSCoder) {
-            super.init(coder: aDecoder)
-        }
+        super.init(coder: aDecoder)
+        setupViews()
+    }
+
     func update() {
         UIView.transition(with: self, duration: 0.12, options: .transitionCrossDissolve, animations: {
             self.status ? self.setImage(self.filledIcon, for: .normal) : self.setImage(self.basicIcon, for: .normal)
         })
     }
-    func toggle() {
-          self.status ? self.setStatus(false) : self.setStatus(true)
-      }
-      
+
+    @objc func toggle() {
+        status ? setStatus(false) : setStatus(true)
+    }
+
     func setStatus(_ status: Bool) {
         self.status = status
     }
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-          super.touchesEnded(touches, with: event)
-          self.sendHapticFeedback()
-          self.toggle()
-      }
-      
-      func sendHapticFeedback() {
-          let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .heavy)
-          impactFeedbackgenerator.prepare()
-          impactFeedbackgenerator.impactOccurred()
-      }
+
+
+
 }
