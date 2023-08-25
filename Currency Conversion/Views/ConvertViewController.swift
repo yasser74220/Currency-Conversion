@@ -8,8 +8,10 @@
 import UIKit
 import iOSDropDown
 import SDWebImage
+import Lottie
 class ConvertViewController: UIViewController {
     let context = {UIApplication.shared.delegate as! AppDelegate}().persistentContainer.viewContext
+    var animationView: LottieAnimationView?
     @IBOutlet weak var toImageView: UIImageView!
     @IBOutlet weak var toStackView: UIStackView!
     @IBOutlet weak var fromStackView: UIStackView!
@@ -63,8 +65,14 @@ class ConvertViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         addToFavoritesStackView.addGestureRecognizer(tap)
         getItems()
-
+       
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        exchangeRateCollectionView.reloadData()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        exchangeRateCollectionView.reloadData()
     }
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         let vc = FavoriteViewController() //change this to your class na
@@ -98,7 +106,16 @@ class ConvertViewController: UIViewController {
 extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        models.count
+        if models.count == 0 {
+            animationView = .init(name: "emptyList")
+            animationView?.frame = collectionView.frame
+            animationView?.loopMode = .repeat(3)
+            view.addSubview(animationView!)
+            animationView?.play()
+            return models.count
+        }
+         
+        return models.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -111,7 +128,7 @@ extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExchangeRateCollectionViewCell", for: indexPath) as! ExchangeRateCollectionViewCell
         cell.setCellData(name: models[indexPath.row].currencyName!, value: models[indexPath.row].currencyCode!, image: "https://cdn.britannica.com/33/4833-004-828A9A84/Flag-United-States-of-America.jpg",code:   models[indexPath.row].currencyName!)
-     
+       
         return cell
     }
     

@@ -18,7 +18,7 @@ class CurrencyConversionViewController: UIViewController {
         super.viewDidLoad()
          segmentedControl.layer.cornerRadius = 40
          segmentedControl.layer.borderWidth = 0.5
-         
+         navigationController?.setNavigationBarHidden(true, animated: true)
          segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .allEvents)
          segmentedControl.selectedSegmentIndex = 0
          displayViewController(ConvertViewController())

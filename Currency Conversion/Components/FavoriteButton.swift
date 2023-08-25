@@ -26,6 +26,7 @@ class FavoriteButton: UIButton {
 
         self.imageView?.image = basicIcon
         self.setTitle("", for: .normal)
+        update()
         self.addTarget(self, action: #selector(toggle), for: .touchUpInside)
 
 
@@ -43,7 +44,7 @@ class FavoriteButton: UIButton {
     }
 
     @objc func toggle() {
-        status ? setStatus(false) : setStatus(true)
+        status = !status
     }
 
     func setStatus(_ status: Bool) {

@@ -31,6 +31,7 @@
 		4DD7B0942A9659BE00860561 /* CompareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD7B0922A9659BE00860561 /* CompareViewController.swift */; };
 		4DD7B0952A9659BE00860561 /* CompareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DD7B0932A9659BE00860561 /* CompareViewController.xib */; };
 		4DEA106D2A98E4CE00B0BCCE /* FavoriteCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA106B2A98E4CE00B0BCCE /* FavoriteCoreDataModel.xcdatamodeld */; };
+		4DEA10732A992E7400B0BCCE /* emptyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 4DEA10722A992E7400B0BCCE /* emptyList.json */; };
 		A6749BCC821343C980DF9E06 /* Pods_Currency_Conversion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4050EEE7F5F41E3D5230072B /* Pods_Currency_Conversion.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		4DEA106C2A98E4CE00B0BCCE /* FavoriteCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		4DEA106E2A98E51600B0BCCE /* FavoriteList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteList+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		4DEA106F2A98E51600B0BCCE /* FavoriteList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteList+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		4DEA10722A992E7400B0BCCE /* emptyList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = emptyList.json; path = ../../../emptyList.json; sourceTree = "<group>"; };
 		F74D41E092703542F19368E5 /* Pods-Currency Conversion.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Currency Conversion.release.xcconfig"; path = "Target Support Files/Pods-Currency Conversion/Pods-Currency Conversion.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				4D55AC2D2A93327700B77E10 /* Assets.xcassets */,
+				4DEA10722A992E7400B0BCCE /* emptyList.json */,
 				4D55AC2F2A93327700B77E10 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
@@ -300,6 +303,7 @@
 				4D55AC312A93327700B77E10 /* LaunchScreen.storyboard in Resources */,
 				4D33D40E2A9381180018458C /* CurrencyConversionViewController.xib in Resources */,
 				4D46D4872A97FCDE008FAAC5 /* FavoriteViewController.xib in Resources */,
+				4DEA10732A992E7400B0BCCE /* emptyList.json in Resources */,
 				4DD7B0952A9659BE00860561 /* CompareViewController.xib in Resources */,
 				4D55AC2E2A93327700B77E10 /* Assets.xcassets in Resources */,
 				4D46D48B2A97FDCB008FAAC5 /* FavouriteCollectionViewCell.xib in Resources */,

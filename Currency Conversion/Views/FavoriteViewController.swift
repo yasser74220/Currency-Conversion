@@ -80,15 +80,18 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavouriteCollectionViewCell", for: indexPath) as! FavouriteCollectionViewCell
         cell.setCellData(name: currencies[indexPath.row], value: currencies[indexPath.row], image: "https://cdn.britannica.com/33/4833-004-828A9A84/Flag-United-States-of-America.jpg")
         for fav in favoriteCurrencies {
-            if currencies[indexPath.row] == fav.currencyName {
-                cell.favoriteButton.setStatus(true)
+            if currencies[indexPath.item] == fav.currencyName {
+                 cell.favoriteButton.setStatus(true)
+                
             }
             
         }
-        
-        cell.btnTapAction = {
+        cell.btnTapAction = { [self]
            () in
-             cell.favoriteButton.update()
+            if cell.favoriteButton.status == true {
+                addItem(currecnyName: currencies[indexPath.row], currencyCode: currencies[indexPath.row])
+            }
+            
              print( cell.favoriteButton.status)
         }
         return cell

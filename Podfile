@@ -10,4 +10,5 @@ target 'Currency Conversion' do
   pod 'iOSDropDown'
   pod 'SDWebImage'
   pod 'IQKeyboardManagerSwift'
+  pod 'lottie-ios'
 end
