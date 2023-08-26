@@ -7,15 +7,18 @@
 
 import Foundation
 
-// MARK: - Currecncies
+// MARK: - Currencies
 struct Currencies: Codable {
-    let result: String
-    let documentation, termsOfUse: String
-    let supportedCodes: [[String]]
+    let currencies: [Currency]
+}
+
+// MARK: - Currency
+struct Currency: Codable {
+    let code, name: String
+    let flagURL: String
 
     enum CodingKeys: String, CodingKey {
-        case result, documentation
-        case termsOfUse = "terms_of_use"
-        case supportedCodes = "supported_codes"
+        case code, name
+        case flagURL = "flag_url"
     }
 }

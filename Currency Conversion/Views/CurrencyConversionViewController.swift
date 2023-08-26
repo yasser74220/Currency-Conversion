@@ -12,13 +12,20 @@ class CurrencyConversionViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var contentView: UIView!
+    lazy var viewModel = ConvertViewModel()
+
      override func viewDidLoad() {
         super.viewDidLoad()
+         viewModel.getCurrencies() {  threeCode,countries,flags,error in
+             CurrencyList.countries = countries
+             CurrencyList.threeCode = threeCode
+             CurrencyList.flags = flags
+            }
          segmentedControl.layer.cornerRadius = 40
          segmentedControl.layer.borderWidth = 0.5
          segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .allEvents)
          displayViewController(ConvertViewController())
-
+     
     }
  
   

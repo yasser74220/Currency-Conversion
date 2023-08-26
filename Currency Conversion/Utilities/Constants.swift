@@ -43,4 +43,14 @@ struct Design {
             return []
         }
     }
+    struct EndPoints {
+        static let Currencies = "https://mocki.io/v1/58d53648-9753-4e03-894f-30e0ba0395c1"
+    }
+}
+
+struct CurrencyList {
+   
+    static var threeCode:[String] = []
+    static var countries:[String] = []
+    static var flags:[String] = []
 }

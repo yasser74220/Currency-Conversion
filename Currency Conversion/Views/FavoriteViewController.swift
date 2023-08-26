@@ -20,21 +20,16 @@ class FavoriteViewController: UIViewController {
         favoriteCollectionView.dataSource = self
         favoriteCollectionView.register(UINib(nibName: "FavouriteCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FavouriteCollectionViewCell")
         favoriteCollectionView.register(UINib(nibName: "ExchangeRateHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ExchangeRateHeaderCollectionReusableView")
-
         getItems()
         // Do any additional setup after loading the view.
     }
 
     func getItems() {
-        do {
-            viewModel.getCurrencies { _, countries, _ in
-                self.currencies = countries
-                self.favoriteCollectionView.reloadData()
-            }
+//            viewModel.getCurrencies { _, countries, _ in
+//                self.currencies = countries
+//                self.favoriteCollectionView.reloadData()
+//            }
             favoriteCurrencies = Design.Functions.getItems(collectionView: favoriteCollectionView)
-          
-        } catch {
-        }
     }
 
 }
