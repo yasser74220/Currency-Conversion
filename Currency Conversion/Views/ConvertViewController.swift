@@ -10,8 +10,6 @@ import iOSDropDown
 import SDWebImage
 import Lottie
 class ConvertViewController: UIViewController {
-    let context = {UIApplication.shared.delegate as! AppDelegate}().persistentContainer.viewContext
-    var animationView: LottieAnimationView?
     @IBOutlet weak var toImageView: UIImageView!
     @IBOutlet weak var toStackView: UIStackView!
     @IBOutlet weak var fromStackView: UIStackView!
@@ -27,28 +25,7 @@ class ConvertViewController: UIViewController {
     var models = [FavoriteList]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        amountTextField.layer.borderWidth = 0.5
-        amountTextField.layer.cornerRadius = 20
-        amountTextField.layer.borderColor = UIColor(red: 197/255.0, green: 197/255.0, blue: 197/255.0, alpha: 1.0).cgColor
-        resultTextField.layer.cornerRadius = 20
-        resultTextField.layer.borderWidth = 0.5
-        resultTextField.layer.borderColor = UIColor(red: 197/255.0, green: 197/255.0, blue: 197/255.0, alpha: 1.0).cgColor
-        convertButton.layer.cornerRadius = 25
-        fromStackView.layer.borderWidth = 0.5
-        fromStackView.layer.cornerRadius = 20
-        fromStackView.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
-        fromStackView.layer.borderColor = UIColor(red: 197/255.0, green: 197/255.0, blue: 197/255.0, alpha: 1.0).cgColor
-        fromStackView.isLayoutMarginsRelativeArrangement = true
-        toStackView.layer.borderWidth = 0.5
-        toStackView.layer.cornerRadius = 20
-        toStackView.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
-        toStackView.layer.borderColor = UIColor(red: 197/255.0, green: 197/255.0, blue: 197/255.0, alpha: 1.0).cgColor
-        toStackView.isLayoutMarginsRelativeArrangement = true
-        addToFavoritesStackView.layer.borderWidth = 0.5
-        addToFavoritesStackView.layer.cornerRadius = 20
-        addToFavoritesStackView.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        addToFavoritesStackView.layer.borderColor = UIColor.black.cgColor
-        addToFavoritesStackView.isLayoutMarginsRelativeArrangement = true
+        initialUI()
         viewModel.getCurrencies() { threeCode,countries, error in
                     self.sourceDropDownMenu.optionArray = countries
                     self.targetDropDownMenu.optionArray = countries
@@ -62,23 +39,12 @@ class ConvertViewController: UIViewController {
         exchangeRateCollectionView.register(UINib(nibName: "ExchangeRateHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ExchangeRateHeaderCollectionReusableView")
         exchangeRateCollectionView.dataSource = self
         exchangeRateCollectionView.delegate = self
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(goToFavorites(_:)))
         addToFavoritesStackView.addGestureRecognizer(tap)
-        getItems()
-       
+        models = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
         // Do any additional setup after loading the view.
     }
-    override func viewWillAppear(_ animated: Bool) {
-        exchangeRateCollectionView.reloadData()
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        exchangeRateCollectionView.reloadData()
-    }
-    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        let vc = FavoriteViewController() //change this to your class na
-        self.present(vc, animated: true)
-        
-    }
+   
     @IBAction func convertButtonTapped(_ sender: Any) {
                 guard let source = sourceDropDownMenu.text, let target = targetDropDownMenu.text, let amount = amountTextField.text else { return }
              
@@ -89,29 +55,40 @@ class ConvertViewController: UIViewController {
                 })
         
     }
-    func getItems() {
-        do {
-            models = try context.fetch(FavoriteList.fetchRequest())
-            DispatchQueue.main.async {
-                self.exchangeRateCollectionView.reloadData()
-            }
-        }
-        catch {
-            
-        }
+
+}
+extension ConvertViewController{
+    func initialUI()  {
+        amountTextField.layer.borderWidth = Design.Measurments.borderWidth
+        amountTextField.layer.cornerRadius = Design.Measurments.cornerRaduis
+        amountTextField.layer.borderColor = Design.Colors.lightGrey
+        resultTextField.layer.cornerRadius = Design.Measurments.cornerRaduis
+        resultTextField.layer.borderWidth = Design.Measurments.borderWidth
+        resultTextField.layer.borderColor = Design.Colors.lightGrey
+        convertButton.layer.cornerRadius = Design.Measurments.cornerRaduis
+        fromStackView.layer.borderWidth = Design.Measurments.borderWidth
+        fromStackView.layer.cornerRadius = Design.Measurments.cornerRaduis
+        fromStackView.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        fromStackView.layer.borderColor = Design.Colors.lightGrey
+        fromStackView.isLayoutMarginsRelativeArrangement = true
+        toStackView.layer.borderWidth = Design.Measurments.borderWidth
+        toStackView.layer.cornerRadius = Design.Measurments.cornerRaduis
+        toStackView.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        toStackView.layer.borderColor = Design.Colors.lightGrey
+        toStackView.isLayoutMarginsRelativeArrangement = true
+        addToFavoritesStackView.layer.borderWidth = Design.Measurments.borderWidth
+        addToFavoritesStackView.layer.cornerRadius = Design.Measurments.cornerRaduis
+        addToFavoritesStackView.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        addToFavoritesStackView.layer.borderColor = UIColor.black.cgColor
+        addToFavoritesStackView.isLayoutMarginsRelativeArrangement = true
     }
 }
-
 
 extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if models.count == 0 {
-            animationView = .init(name: "emptyList")
-            animationView?.frame = collectionView.frame
-            animationView?.loopMode = .repeat(3)
-            view.addSubview(animationView!)
-            animationView?.play()
+            Design.Functions.emptyListLottie(collectionView: collectionView, view: view)
             return models.count
         }
          

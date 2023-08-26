@@ -31,23 +31,12 @@ class FavoriteViewController: UIViewController {
                 self.currencies = countries
                 self.favoriteCollectionView.reloadData()
             }
-            favoriteCurrencies = try context.fetch(FavoriteList.fetchRequest())
-            DispatchQueue.main.async {
-                self.favoriteCollectionView.reloadData()
-            }
+            favoriteCurrencies = Design.Functions.getItems(collectionView: favoriteCollectionView)
+          
         } catch {
         }
     }
 
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-     }
-     */
 }
 
 extension FavoriteViewController {
@@ -107,8 +96,5 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
         return CGSize(width: collectionView.frame.width, height: 65)
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! FavouriteCollectionViewCell
-         
-    }
+ 
 }

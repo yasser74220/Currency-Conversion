@@ -22,6 +22,8 @@
 		4D55AC2E2A93327700B77E10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D55AC2D2A93327700B77E10 /* Assets.xcassets */; };
 		4D55AC312A93327700B77E10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D55AC2F2A93327700B77E10 /* LaunchScreen.storyboard */; };
 		4D55AC3F2A933B8100B77E10 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55AC3E2A933B8100B77E10 /* ApiService.swift */; };
+		4D5A134E2A997F070081C03D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5A134D2A997F070081C03D /* Constants.swift */; };
+		4D5A13502A9980D30081C03D /* UIViewController+GoToFavorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5A134F2A9980D30081C03D /* UIViewController+GoToFavorites.swift */; };
 		4D8F3EBD2A94C6FF001454DC /* PairConversionDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8F3EBC2A94C6FF001454DC /* PairConversionDataModel.swift */; };
 		4D8F3EC42A94E596001454DC /* CurrencyConversionRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8F3EC32A94E596001454DC /* CurrencyConversionRepo.swift */; };
 		4DA7C9AC2A96977F0081AD17 /* ConvertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA7C9AB2A96977F0081AD17 /* ConvertViewModel.swift */; };
@@ -55,6 +57,8 @@
 		4D55AC302A93327700B77E10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4D55AC322A93327700B77E10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D55AC3E2A933B8100B77E10 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		4D5A134D2A997F070081C03D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4D5A134F2A9980D30081C03D /* UIViewController+GoToFavorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+GoToFavorites.swift"; sourceTree = "<group>"; };
 		4D8F3EBC2A94C6FF001454DC /* PairConversionDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairConversionDataModel.swift; sourceTree = "<group>"; };
 		4D8F3EC32A94E596001454DC /* CurrencyConversionRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConversionRepo.swift; sourceTree = "<group>"; };
 		4DA7C9AB2A96977F0081AD17 /* ConvertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertViewModel.swift; sourceTree = "<group>"; };
@@ -95,8 +99,8 @@
 			isa = PBXGroup;
 			children = (
 				4DD7B0922A9659BE00860561 /* CompareViewController.swift */,
-				4DD7B08E2A96599F00860561 /* ConvertViewController.swift */,
 				4D33D40B2A9381180018458C /* CurrencyConversionViewController.swift */,
+				4DD7B08E2A96599F00860561 /* ConvertViewController.swift */,
 				4D46D4842A97FCDE008FAAC5 /* FavoriteViewController.swift */,
 			);
 			path = Views;
@@ -156,6 +160,7 @@
 				4D55AC402A9346E600B77E10 /* Models */,
 				4D33D40A2A9380210018458C /* Views */,
 				4D55AC3B2A933A0400B77E10 /* ViewModel */,
+				4D5A134C2A997E1A0081C03D /* Utilities */,
 				4D55AC3C2A933AB800B77E10 /* Resources */,
 				4DEA106B2A98E4CE00B0BCCE /* FavoriteCoreDataModel.xcdatamodeld */,
 			);
@@ -203,6 +208,15 @@
 				4DB839D82A95F57B0048532C /* CurrenciesDataModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		4D5A134C2A997E1A0081C03D /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4D5A134D2A997F070081C03D /* Constants.swift */,
+				4D5A134F2A9980D30081C03D /* UIViewController+GoToFavorites.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		4D8F3EBE2A94E3A2001454DC /* Screens */ = {
@@ -368,7 +382,9 @@
 				4D46D48A2A97FDCB008FAAC5 /* FavouriteCollectionViewCell.swift in Sources */,
 				4D4AA55F2A96E77000AA1C5A /* ExchangeRateHeaderCollectionReusableView.swift in Sources */,
 				4D46D4832A97FA55008FAAC5 /* FavoriteButton.swift in Sources */,
+				4D5A13502A9980D30081C03D /* UIViewController+GoToFavorites.swift in Sources */,
 				4D8F3EBD2A94C6FF001454DC /* PairConversionDataModel.swift in Sources */,
+				4D5A134E2A997F070081C03D /* Constants.swift in Sources */,
 				4DB839D92A95F57B0048532C /* CurrenciesDataModel.swift in Sources */,
 				4D55AC3F2A933B8100B77E10 /* ApiService.swift in Sources */,
 				4D55AC252A93326E00B77E10 /* AppDelegate.swift in Sources */,

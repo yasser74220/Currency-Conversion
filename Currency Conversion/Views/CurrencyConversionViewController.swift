@@ -10,25 +10,17 @@ import iOSDropDown
 import UIKit
 class CurrencyConversionViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
- 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var contentView: UIView!
-    var codes:[String] = []
      override func viewDidLoad() {
         super.viewDidLoad()
          segmentedControl.layer.cornerRadius = 40
          segmentedControl.layer.borderWidth = 0.5
-         navigationController?.setNavigationBarHidden(true, animated: true)
          segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .allEvents)
-         segmentedControl.selectedSegmentIndex = 0
          displayViewController(ConvertViewController())
 
     }
-    override func viewDidLayoutSubviews() {
-     
-        segmentedControl.layer.cornerRadius = 50
-        segmentedControl.layer.borderWidth = 0.5
-    }
+ 
   
  
     @objc func segmentedControlValueChanged(_ segmentedControl: UISegmentedControl) {
