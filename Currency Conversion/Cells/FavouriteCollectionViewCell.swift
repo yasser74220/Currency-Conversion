@@ -26,9 +26,10 @@ class FavouriteCollectionViewCell: UICollectionViewCell {
 
     }
  
-    func setCellData (name:String, value:String, image:String){
+    func setCellData (name:String, value:String, image:String, buttonTag:Int){
         currencyCodeLabel.text = value
         currencyLabel.text = name
         currencyimage.sd_setImage(with: URL(string: image))
+        favoriteButton.tag = buttonTag
     }
 }

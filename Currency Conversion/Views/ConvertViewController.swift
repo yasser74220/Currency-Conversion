@@ -17,7 +17,6 @@ class ConvertViewController: UIViewController {
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var addToFavoritesStackView: UIStackView!
     lazy var viewModel = ConvertViewModel()
- 
     @IBOutlet weak var exchangeRateCollectionView: UICollectionView!
     var urlFlags:[String]?
     var models = [FavoriteList]()
@@ -26,10 +25,10 @@ class ConvertViewController: UIViewController {
         initialUI()
      
         viewModel.getCurrencies() {[self] threeCode,countries,flags,_   in
-            sourceDropDownMenu.optionArray = viewModel.fillDropDown()
-           targetDropDownMenu.optionArray = viewModel.fillDropDown()
-            sourceDropDownMenu.text = viewModel.fillDropDown()[0]
-            targetDropDownMenu.text = viewModel.fillDropDown()[1]
+            sourceDropDownMenu.optionArray = viewModel.getOpthioArrayForDropDown()
+           targetDropDownMenu.optionArray = viewModel.getOpthioArrayForDropDown()
+            sourceDropDownMenu.text = viewModel.getOpthioArrayForDropDown()[0]
+            targetDropDownMenu.text = viewModel.getOpthioArrayForDropDown()[1]
             sourceDropDownMenu.selectedIndex = 0
             targetDropDownMenu.selectedIndex = 1
             }
@@ -41,7 +40,13 @@ class ConvertViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(goToFavorites(_:)))
         addToFavoritesStackView.addGestureRecognizer(tap)
         models = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
-        // Do any additional setup after loading the view.
+      
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        DispatchQueue.main.async { [self] in
+            models = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
+            exchangeRateCollectionView.reloadData()
+        }
     }
    
     @IBAction func convertButtonTapped(_ sender: Any) {
@@ -85,9 +90,11 @@ extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDel
         if models.count == 0 {
             Design.Functions.emptyListLottie(collectionView: collectionView, view: view)
             return models.count
+        }else {
+            return models.count
+
         }
          
-        return models.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -99,7 +106,7 @@ extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDel
    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExchangeRateCollectionViewCell", for: indexPath) as! ExchangeRateCollectionViewCell
-        cell.setCellData(name: models[indexPath.row].currencyName!, value: models[indexPath.row].currencyCode!, image: "https://cdn.britannica.com/33/4833-004-828A9A84/Flag-United-States-of-America.jpg",code:   models[indexPath.row].currencyName!)
+        cell.setCellData(name: models[indexPath.row].currencyName!, value: models[indexPath.row].currencyCode!, image: models[indexPath.row].currencyFlagUrl! ,code: models[indexPath.row].currencyName!)
        
         return cell
     }

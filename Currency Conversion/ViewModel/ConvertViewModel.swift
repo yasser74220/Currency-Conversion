@@ -37,7 +37,7 @@ class ConvertViewModel {
             completion(result.conversionResult.description,error)
         }
     }
-    func fillDropDown() -> [String]{
+    func getOpthioArrayForDropDown() -> [String]{
         var optionArray = [String]()
         for flag in CurrencyList.threeCode {
             optionArray.append(getFlagEmoji(flag: flag) + "  " + flag)

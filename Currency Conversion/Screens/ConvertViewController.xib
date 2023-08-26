@@ -77,6 +77,9 @@
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="handleKeyboard" value="NO"/>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="checkMarkEnabled" value="NO"/>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSearchEnable" value="NO"/>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedRowColor">
+                                            <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </textField>
                             </subviews>
@@ -122,6 +125,9 @@
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="handleKeyboard" value="NO"/>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="checkMarkEnabled" value="NO"/>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSearchEnable" value="NO"/>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedRowColor">
+                                            <color key="value" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EEL-UZ-65s">

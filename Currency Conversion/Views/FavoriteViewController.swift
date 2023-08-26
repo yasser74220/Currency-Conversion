@@ -9,9 +9,7 @@ import UIKit
 
 class FavoriteViewController: UIViewController {
     let context = { UIApplication.shared.delegate as! AppDelegate }().persistentContainer.viewContext
-    // all currencies
     lazy var viewModel = ConvertViewModel()
-    var currencies: [String] = []
     var favoriteCurrencies = [FavoriteList]()
     @IBOutlet var favoriteCollectionView: UICollectionView!
     override func viewDidLoad() {
@@ -25,21 +23,22 @@ class FavoriteViewController: UIViewController {
     }
 
     func getItems() {
-//            viewModel.getCurrencies { _, countries, _ in
-//                self.currencies = countries
-//                self.favoriteCollectionView.reloadData()
-//            }
+        viewModel.getCurrencies { threecode, countries, flags,_  in
+              
+                self.favoriteCollectionView.reloadData()
+            }
             favoriteCurrencies = Design.Functions.getItems(collectionView: favoriteCollectionView)
     }
 
 }
-
+ 
 extension FavoriteViewController {
-    func addItem(currecnyName: String, currencyCode: String) {
+    func addItem(currecnyName: String, currencyCode: String, currencyFlag: String) {
         let newItem = FavoriteList(context: context)
         newItem.currencyCode = currencyCode
         newItem.currencyName = currecnyName
         newItem.createdAt = Date()
+        newItem.currencyFlagUrl = currencyFlag
         do {
             try context.save()
         } catch {
@@ -57,14 +56,14 @@ extension FavoriteViewController {
 
 extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        currencies.count
+        CurrencyList.countries.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavouriteCollectionViewCell", for: indexPath) as! FavouriteCollectionViewCell
-        cell.setCellData(name: currencies[indexPath.row], value: currencies[indexPath.row], image: "https://cdn.britannica.com/33/4833-004-828A9A84/Flag-United-States-of-America.jpg")
+        cell.setCellData(name: CurrencyList.threeCode[indexPath.item], value: CurrencyList.countries[indexPath.item], image: CurrencyList.flags[indexPath.item],buttonTag: indexPath.item)
         for fav in favoriteCurrencies {
-            if currencies[indexPath.item] == fav.currencyName {
+            if CurrencyList.countries[indexPath.item] == fav.currencyName {
                  cell.favoriteButton.setStatus(true)
                 
             }
@@ -72,11 +71,35 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
         }
         cell.btnTapAction = { [self]
            () in
-            if cell.favoriteButton.status == true {
-                addItem(currecnyName: currencies[indexPath.row], currencyCode: currencies[indexPath.row])
+            if cell.favoriteButton.status == true  {
+                if favoriteCurrencies.isEmpty{
+                    addItem(currecnyName: CurrencyList.countries[indexPath.item], currencyCode: CurrencyList.threeCode[indexPath.item], currencyFlag: CurrencyList.flags[indexPath.item])
+                    print("FirstItem")
+                    
+                    favoriteCurrencies = try! Design.Shared.persistentContainerContext.fetch(FavoriteList.fetchRequest())
+                }
+                else {
+                    for fav in favoriteCurrencies {
+                        if CurrencyList.countries[indexPath.item] != fav.currencyName {
+                            addItem(currecnyName: CurrencyList.countries[indexPath.item], currencyCode: CurrencyList.threeCode[indexPath.item], currencyFlag: CurrencyList.flags[indexPath.item])
+                            
+                            print("added")
+                            break
+                        }
+                    }
+                }
             }
+       
+            else if cell.favoriteButton.status == false {
+                for fav in favoriteCurrencies {
+                    if CurrencyList.countries[indexPath.item] == fav.currencyName {
+                        deleteItem(item: fav)
+                        print("deleted")
+                    }
+                }
+            }
+          
             
-             print( cell.favoriteButton.status)
         }
         return cell
     }
