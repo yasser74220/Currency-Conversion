@@ -25,7 +25,14 @@ class FavouriteCollectionViewCell: UICollectionViewCell {
         btnTapAction?()
 
     }
- 
+    func checkFavorite(favoriteCurrencies: [FavoriteList],indexPath: IndexPath) {
+        print(CurrencyList.countries)
+        for fav in favoriteCurrencies {
+           if CurrencyList.countries[indexPath.item] == fav.currencyName {
+                favoriteButton.setStatus(true)
+           }
+       }
+    }
     func setCellData (name:String, value:String, image:String, buttonTag:Int){
         currencyCodeLabel.text = value
         currencyLabel.text = name

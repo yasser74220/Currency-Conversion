@@ -16,10 +16,11 @@ class ConvertViewController: UIViewController {
     @IBOutlet weak var resultTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var addToFavoritesStackView: UIStackView!
-    lazy var viewModel = ConvertViewModel()
     @IBOutlet weak var exchangeRateCollectionView: UICollectionView!
-    var urlFlags:[String]?
-    var models = [FavoriteList]()
+    
+    lazy var viewModel = ConvertViewModel()
+    var favoriteCurrencies = [FavoriteList]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialUI()
@@ -37,15 +38,13 @@ class ConvertViewController: UIViewController {
         exchangeRateCollectionView.register(UINib(nibName: "ExchangeRateHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ExchangeRateHeaderCollectionReusableView")
         exchangeRateCollectionView.dataSource = self
         exchangeRateCollectionView.delegate = self
-        let tap = UITapGestureRecognizer(target: self, action: #selector(goToFavorites(_:)))
-        addToFavoritesStackView.addGestureRecognizer(tap)
-        models = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
+        addToFavoritesStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goToFavorites(_:))))
+        favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
       
     }
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.async { [self] in
-            models = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
-            exchangeRateCollectionView.reloadData()
+            favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
         }
     }
    
@@ -58,6 +57,46 @@ class ConvertViewController: UIViewController {
                     }
                 })
         
+    }
+
+}
+
+
+extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if favoriteCurrencies.count == 0 {
+            Design.Functions.emptyListLottie(collectionView: collectionView, view: view)
+            return favoriteCurrencies.count
+        } else {
+            return favoriteCurrencies.count
+
+        }
+         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.frame.width, height: 65)
+       
+    }
+
+   
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExchangeRateCollectionViewCell", for: indexPath) as! ExchangeRateCollectionViewCell
+        cell.setCellData(name: favoriteCurrencies[indexPath.row].currencyName!, value: favoriteCurrencies[indexPath.row].currencyCode!, image: favoriteCurrencies[indexPath.row].currencyFlagUrl! ,code: favoriteCurrencies[indexPath.row].currencyName!)
+       
+        return cell
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+        
+    }
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ExchangeRateHeaderCollectionReusableView", for: indexPath) as! ExchangeRateHeaderCollectionReusableView
+        header.label.text = "My Portofolio"
+        return header
     }
 
 }
@@ -82,43 +121,4 @@ extension ConvertViewController{
         addToFavoritesStackView.layer.borderColor = UIColor.black.cgColor
         addToFavoritesStackView.isLayoutMarginsRelativeArrangement = true
     }
-}
-
-extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if models.count == 0 {
-            Design.Functions.emptyListLottie(collectionView: collectionView, view: view)
-            return models.count
-        }else {
-            return models.count
-
-        }
-         
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: collectionView.frame.width, height: 65)
-       
-    }
-
-   
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExchangeRateCollectionViewCell", for: indexPath) as! ExchangeRateCollectionViewCell
-        cell.setCellData(name: models[indexPath.row].currencyName!, value: models[indexPath.row].currencyCode!, image: models[indexPath.row].currencyFlagUrl! ,code: models[indexPath.row].currencyName!)
-       
-        return cell
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-        
-    }
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ExchangeRateHeaderCollectionReusableView", for: indexPath) as! ExchangeRateHeaderCollectionReusableView
-        header.label.text = "My Portofolio"
-        return header
-    }
-
 }

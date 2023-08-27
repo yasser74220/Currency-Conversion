@@ -20,6 +20,7 @@ struct Design {
     struct Shared {
         static let persistentContainerContext = { UIApplication.shared.delegate as! AppDelegate }().persistentContainer.viewContext
     }
+     
     struct Functions {
         static func emptyListLottie (collectionView: UICollectionView, view: UIView) {
             var animationView: LottieAnimationView?
@@ -49,7 +50,7 @@ struct Design {
 }
 
 struct CurrencyList {
-   
+    static var favoriteList = try! Design.Shared.persistentContainerContext.fetch(FavoriteList.fetchRequest())
     static var threeCode:[String] = []
     static var countries:[String] = []
     static var flags:[String] = []

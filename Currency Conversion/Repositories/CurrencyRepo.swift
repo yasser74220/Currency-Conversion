@@ -17,7 +17,7 @@
 //            threeCode.append(currency.code)
 //            countries.append(currency.name)
 //            flags.append(currency.flagURL)
-//            
+//
 //        }
 //        completion(threeCode,countries,flags,nil)
 //
@@ -43,8 +43,8 @@
 //       var emoji = ""
 //       for scalar in code.unicodeScalars {
 //           emoji.append(String(UnicodeScalar(base + scalar.value)!))
-//            
+//
 //       }
-//       
+//
 //       return emoji
 //   }
