@@ -18,10 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         IQKeyboardManager.shared.enable = true
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteList")
-              let delAllReqVar = NSBatchDeleteRequest(fetchRequest: request)
-              do { try persistentContainer.viewContext.execute(delAllReqVar) }
-              catch { print(error) }
         self.window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController =  CurrencyConversionViewController()
         window?.makeKeyAndVisible()

@@ -43,32 +43,7 @@ class ConvertViewController: UIViewController {
         favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
       
     }
-    @objc func validator ( textField:UITextField){
-          let rgx = NSPredicate(format:"SELF MATCHES %@", "[+-]?([0-9]*[.])?[0-9]+")
-         var animationView: LottieAnimationView?
-
-          if (rgx.evaluate(with: textField.text)){
-              animationView = .init(name: "valid")
-              animationView?.frame =  textField.frame.offsetBy(dx: 65, dy: 50)
-              animationView?.loopMode = .playOnce
-              view.addSubview(animationView!)
-              animationView?.reloadImages()
-              animationView?.play { (finished) in
-                  animationView!.isHidden = true
-              }
-              
-          }
-          else {
-              animationView = .init(name: "invalid")
-              animationView?.frame =  textField.frame.offsetBy(dx: 65, dy: 50)
-              animationView?.loopMode = .repeat(2)
-              view.addSubview(animationView!)
-              animationView?.reloadImages()
-              animationView?.play { (finished) in
-                  animationView!.isHidden = true
-              }
-          }
-      }
+   
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.async { [self] in
             favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
@@ -113,7 +88,7 @@ extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDel
    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExchangeRateCollectionViewCell", for: indexPath) as! ExchangeRateCollectionViewCell
-        cell.setCellData(name: favoriteCurrencies[indexPath.row].currencyName!, value: favoriteCurrencies[indexPath.row].currencyCode!, image: favoriteCurrencies[indexPath.row].currencyFlagUrl! ,code: favoriteCurrencies[indexPath.row].currencyName!)
+            cell.setCellData(name: favoriteCurrencies[indexPath.row].currencyName!, value: favoriteCurrencies[indexPath.row].currencyCode!, image: favoriteCurrencies[indexPath.row].currencyFlagUrl! ,code: favoriteCurrencies[indexPath.row].currencyName!)
        
         return cell
     }
