@@ -39,20 +39,49 @@ class ConvertViewController: UIViewController {
         exchangeRateCollectionView.dataSource = self
         exchangeRateCollectionView.delegate = self
         addToFavoritesStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goToFavorites(_:))))
+        amountTextField.addTarget(self, action: #selector(validator), for: .allEvents)
         favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
       
     }
+    @objc func validator ( textField:UITextField){
+          let rgx = NSPredicate(format:"SELF MATCHES %@", "[+-]?([0-9]*[.])?[0-9]+")
+         var animationView: LottieAnimationView?
+
+          if (rgx.evaluate(with: textField.text)){
+              animationView = .init(name: "valid")
+              animationView?.frame =  textField.frame.offsetBy(dx: 65, dy: 50)
+              animationView?.loopMode = .playOnce
+              view.addSubview(animationView!)
+              animationView?.reloadImages()
+              animationView?.play { (finished) in
+                  animationView!.isHidden = true
+              }
+              
+          }
+          else {
+              animationView = .init(name: "invalid")
+              animationView?.frame =  textField.frame.offsetBy(dx: 65, dy: 50)
+              animationView?.loopMode = .repeat(2)
+              view.addSubview(animationView!)
+              animationView?.reloadImages()
+              animationView?.play { (finished) in
+                  animationView!.isHidden = true
+              }
+          }
+      }
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.async { [self] in
             favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
         }
     }
    
-    @IBAction func convertButtonTapped(_ sender: Any) {
+    @IBAction func convertButtonTapped(_ sender: UIButton) {
                 guard let source = sourceDropDownMenu.selectedIndex, let target = targetDropDownMenu.selectedIndex, let amount = amountTextField.text else { return }
                 
         self.viewModel.getConversionResult(amount: amount, source: CurrencyList.threeCode[source], target: CurrencyList.threeCode[target], completion: { value, error in
+            
                     DispatchQueue.main.async {
+                       
                         self.resultTextField.text = value
                     }
                 })
