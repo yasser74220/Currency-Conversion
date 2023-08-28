@@ -19,14 +19,15 @@ class ConvertViewController: UIViewController {
     @IBOutlet var amountTextField: UITextField!
     @IBOutlet var addToFavoritesStackView: UIStackView!
     @IBOutlet var exchangeRateCollectionView: UICollectionView!
-    //MARK: - OUTLETS
+    //MARK: - Variables
     lazy var viewModel = ConvertViewModel()
     var favoriteCurrencies = [FavoriteList]()
-
+    
+    //MARK: - ViewDidload
     override func viewDidLoad() {
         super.viewDidLoad()
         initialUI()
-        
+        // Fetch Currencies and fill dropdown menu with it
         viewModel.getCurrencies { [self] _, _, _, _ in
             sourceDropDownMenu.optionArray = viewModel.getOpthioArrayForDropDown()
             targetDropDownMenu.optionArray = viewModel.getOpthioArrayForDropDown()
@@ -40,19 +41,21 @@ class ConvertViewController: UIViewController {
         exchangeRateCollectionView.register(UINib(nibName: "ExchangeRateHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ExchangeRateHeaderCollectionReusableView")
         exchangeRateCollectionView.dataSource = self
         exchangeRateCollectionView.delegate = self
+        
         addToFavoritesStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goToFavorites(_:))))
+        
         amountTextField.addTarget(self, action: #selector(validator), for: .editingDidEnd)
+        NotificationCenter.default.addObserver(self, selector: #selector(methodOfReceivedNotification(notification:)), name: Notification.Name("FavoritesList"), object: nil)
+
         favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
     }
- 
-    override func viewWillLayoutSubviews() {
-        if favoriteCurrencies.count == 0 {
-            favoriteCurrencies = CurrencyList.favoriteList
-        } else {
+    @objc func methodOfReceivedNotification(notification: Notification) {
+    
             favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
-        }
-    }
  
+    }
+   
+  
    
     
     @IBAction func convertButtonTapped(_ sender: UIButton) {
@@ -96,6 +99,8 @@ extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ExchangeRateHeaderCollectionReusableView", for: indexPath) as! ExchangeRateHeaderCollectionReusableView
         header.label.text = "My Portofolio"
+        header.closeButton.isHidden = true
+      
         return header
     }
 }
@@ -122,16 +127,3 @@ extension ConvertViewController {
         addToFavoritesStackView.isLayoutMarginsRelativeArrangement = true
     }
 }
-
-// override func viewWillAppear(_ animated: Bool) {
-//
-//            super.viewWillAppear(animated)
-//            self.exchangeRateCollectionView.reloadData()
-//
-//    }
-//    override func viewDidAppear(_ animated: Bool) {
-//        DispatchQueue.main.async { [self] in
-//            favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
-//        }
-//
-//    }

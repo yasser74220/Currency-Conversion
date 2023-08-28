@@ -8,7 +8,7 @@
 import UIKit
 import iOSDropDown
 class CompareViewController: UIViewController {
-
+    //MARK: - Outlets
     @IBOutlet weak var secondTargetResultTextField: UITextField!
     @IBOutlet weak var firstTargetResultTextField: UITextField!
     @IBOutlet weak var secondTargetDropDownMenu: DropDown!
@@ -16,9 +16,24 @@ class CompareViewController: UIViewController {
     @IBOutlet weak var sourceDropDownMenu: DropDown!
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var CompareButton: UIButton!
+    //MARK: - Variables
     lazy var viewModel = ConvertViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialUI()
+        amountTextField.addTarget(self, action: #selector(validator(textField:)), for: .editingDidEnd)
+    }
+  
+    @IBAction func compareButtonTapped(_ sender: Any) {
+        
+    }
+    
+}
+
+//MARK: - Extensions
+extension CompareViewController {
+    func initialUI() {
         amountTextField.layer.borderWidth = Design.Measurments.borderWidth
         amountTextField.layer.cornerRadius = Design.Measurments.cornerRaduis
         amountTextField.layer.borderColor = Design.Colors.lightGrey
@@ -38,10 +53,6 @@ class CompareViewController: UIViewController {
         sourceDropDownMenu.selectedIndex = 0
         firstTargetDropDownMenu.selectedIndex = 1
         secondTargetDropDownMenu.selectedIndex = 2
-        amountTextField.addTarget(self, action: #selector(validator(textField:)), for: .editingDidEnd)
     }
-  
-    @IBAction func compareButtonTapped(_ sender: Any) {
-    }
-    
 }
+

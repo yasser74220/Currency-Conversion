@@ -23,12 +23,24 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RYq-bS-eH6">
+                            <rect key="frame" x="277" y="7" width="50" height="35"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="xmark.circle" catalog="system" title=""/>
+                            <connections>
+                                <action selector="closeButtonTapped:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="BmO-4y-eK3"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="tOD-XZ-mmv" firstAttribute="leading" secondItem="JIM-xH-qQm" secondAttribute="leading" constant="8" id="Dsd-iA-a3H"/>
+                        <constraint firstAttribute="trailing" secondItem="RYq-bS-eH6" secondAttribute="trailing" id="Pqr-Ie-hJl"/>
                         <constraint firstAttribute="bottom" secondItem="tOD-XZ-mmv" secondAttribute="bottom" constant="8" id="V4P-Fa-6OD"/>
                         <constraint firstItem="tOD-XZ-mmv" firstAttribute="top" secondItem="JIM-xH-qQm" secondAttribute="top" constant="8" id="h2o-nq-aVj"/>
+                        <constraint firstAttribute="bottom" secondItem="RYq-bS-eH6" secondAttribute="bottom" constant="8" id="mkA-at-wnc"/>
+                        <constraint firstItem="RYq-bS-eH6" firstAttribute="top" secondItem="JIM-xH-qQm" secondAttribute="top" constant="7" id="pSz-bd-vb9"/>
                     </constraints>
                 </view>
             </subviews>
@@ -42,12 +54,14 @@
                 <constraint firstItem="JIM-xH-qQm" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" id="vNr-VC-ajM"/>
             </constraints>
             <connections>
+                <outlet property="closeButton" destination="RYq-bS-eH6" id="Mhh-CR-y8h"/>
                 <outlet property="label" destination="tOD-XZ-mmv" id="acu-wa-7wU"/>
             </connections>
             <point key="canvasLocation" x="30.534351145038165" y="20.422535211267608"/>
         </collectionReusableView>
     </objects>
     <resources>
+        <image name="xmark.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -12,7 +12,7 @@ class FavoriteViewController: UIViewController {
 
     lazy var viewModel = ConvertViewModel()
     lazy var favoriteViewModel = FavoriteViewModel()
-    var favoriteCurrencies = CurrencyList.favoriteList
+    var favoriteCurrencies = [FavoriteList]()
     var coreDataService = CoreDataService()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +53,11 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ExchangeRateHeaderCollectionReusableView", for: indexPath) as! ExchangeRateHeaderCollectionReusableView
         header.label.text = "My Favorites"
+        header.btnTapAction = { [self]
+            () in
+            self.dismiss(animated: true, completion: nil)
+            NotificationCenter.default.post(name: Notification.Name("FavoritesList"), object: nil)
+        }
         return header
     }
 

@@ -9,9 +9,12 @@ import Alamofire
 import iOSDropDown
 import UIKit
 class CurrencyConversionViewController: UIViewController {
+    //MARK: - Outlets
     @IBOutlet var scrollView: UIScrollView!
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var segmentedControl: SegmentedControl!
     @IBOutlet weak var contentView: UIView!
+    //MARK: - Variables
+
     lazy var viewModel = ConvertViewModel()
 
      override func viewDidLoad() {
@@ -21,20 +24,16 @@ class CurrencyConversionViewController: UIViewController {
              CurrencyList.threeCode = threeCode
              CurrencyList.flags = flags
             }
-       
+ 
          segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .allEvents)
-         segmentedControl.selectedSegmentIndex = 0
+ 
          displayViewController(ConvertViewController())
 
          hideKeyboardWhenTappedAround()
 
      
     }
-    
-    
-  
-   
-   
+ 
     @objc func segmentedControlValueChanged(_ segmentedControl: UISegmentedControl) {
         let selectedSegmentIndex = segmentedControl.selectedSegmentIndex
         switch selectedSegmentIndex {
@@ -48,6 +47,7 @@ class CurrencyConversionViewController: UIViewController {
     }
 
     private func displayViewController(_ viewController: UIViewController) {
+        
         addChild(viewController)
         contentView.addSubview(viewController.view)
         viewController.view.frame = contentView.bounds

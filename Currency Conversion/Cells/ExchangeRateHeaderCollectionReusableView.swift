@@ -9,11 +9,17 @@ import UIKit
 
 class ExchangeRateHeaderCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var label: UILabel!
-    
-     override func awakeFromNib() {
+    var btnTapAction : (()->())?
+
+    @IBOutlet weak var closeButton: UIButton!
+    override func awakeFromNib() {
         super.awakeFromNib()
       
         // Initialization code
     }
+  
     
+    @IBAction func closeButtonTapped(_ sender: UIButton) {
+        btnTapAction?()
+    }
 }

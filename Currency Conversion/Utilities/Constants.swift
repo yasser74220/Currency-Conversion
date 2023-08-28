@@ -28,7 +28,9 @@ struct Design {
             animationView?.frame = collectionView.frame
             animationView?.loopMode = .playOnce
             view.addSubview(animationView!)
-            animationView?.play()
+            animationView?.play{_ in
+                animationView?.isHidden = true
+            }
             
         }
         static func getItems(collectionView: UICollectionView) -> [FavoriteList] {
