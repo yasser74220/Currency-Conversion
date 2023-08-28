@@ -31,8 +31,7 @@ class CurrencyConversionViewController: UIViewController {
 
          hideKeyboardWhenTappedAround()
 
-         UIApplication.shared.statusBarStyle = .lightContent
-
+ 
     }
   
     @objc func segmentedControlValueChanged(_ segmentedControl: UISegmentedControl) {

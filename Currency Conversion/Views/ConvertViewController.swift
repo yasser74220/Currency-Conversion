@@ -58,17 +58,35 @@ class ConvertViewController: UIViewController {
    
     
     @IBAction func convertButtonTapped(_ sender: UIButton) {
-        guard let source = sourceDropDownMenu.selectedIndex, let target = targetDropDownMenu.selectedIndex, let amount = amountTextField.text else { return }
+        var animationView: LottieAnimationView?
+        animationView = .init(name: "loading")
+        animationView?.frame = sender.frame
+        animationView?.backgroundColor = .white
+        animationView?.loopMode = .playOnce
+        view.addSubview(animationView!)
+        animationView?.play{ [self] finish in
+            animationView?.isHidden = true
 
-        viewModel.getConversionResult(amount: amount, source: CurrencyList.threeCode[source], target: CurrencyList.threeCode[target], completion: { value, _ in
-
-            DispatchQueue.main.async { [self] in
-                self.resultTextField.text = value
-                favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
+            if ((amountTextField.text!.isEmpty)) {
+                validator(textField: amountTextField)
 
             }
-        })
+            else {
+                guard let source = sourceDropDownMenu.selectedIndex, let target = targetDropDownMenu.selectedIndex else { return }
+                viewModel.getConversionResult(amount: amountTextField.text!, source: CurrencyList.threeCode[source], target: CurrencyList.threeCode[target], completion: { value, error in
+                   
+                    DispatchQueue.main.async { [self] in
+                        self.resultTextField.text = value
+                
+                    }
+                })
+
+            }
+        }
+        
+      
     }
+    
 }
 
 extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {

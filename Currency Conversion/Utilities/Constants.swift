@@ -53,6 +53,7 @@ struct Design {
     }
     struct EndPoints {
         static let Currencies = "https://mocki.io/v1/58d53648-9753-4e03-894f-30e0ba0395c1"
+        static let Pair = "https://compare-test-production.up.railway.app/pair"
     }
 }
 

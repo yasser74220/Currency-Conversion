@@ -34,7 +34,7 @@ class ConvertViewModel {
     func getConversionResult(amount: String, source: String, target: String,completion: @escaping (String, Error?) -> ()) {
         pairCurrencyService.getConversion(amount: amount, source: source, target: target) {response,error in
             guard let result = response else { return }
-            completion(result.conversionResult.description,error)
+            completion(result.conversionRate.description,error)
         }
     }
     func getOpthioArrayForDropDown() -> [String]{
