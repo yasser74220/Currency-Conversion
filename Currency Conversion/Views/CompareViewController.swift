@@ -38,6 +38,7 @@ class CompareViewController: UIViewController {
         sourceDropDownMenu.selectedIndex = 0
         firstTargetDropDownMenu.selectedIndex = 1
         secondTargetDropDownMenu.selectedIndex = 2
+        amountTextField.addTarget(self, action: #selector(validator(textField:)), for: .editingDidEnd)
     }
   
     @IBAction func compareButtonTapped(_ sender: Any) {

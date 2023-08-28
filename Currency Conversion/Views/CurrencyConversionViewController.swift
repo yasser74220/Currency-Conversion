@@ -21,15 +21,20 @@ class CurrencyConversionViewController: UIViewController {
              CurrencyList.threeCode = threeCode
              CurrencyList.flags = flags
             }
-         segmentedControl.layer.cornerRadius = 40
-         segmentedControl.layer.borderWidth = 0.5
+       
          segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .allEvents)
+         segmentedControl.selectedSegmentIndex = 0
          displayViewController(ConvertViewController())
+
+         hideKeyboardWhenTappedAround()
+
      
     }
- 
+    
+    
   
- 
+   
+   
     @objc func segmentedControlValueChanged(_ segmentedControl: UISegmentedControl) {
         let selectedSegmentIndex = segmentedControl.selectedSegmentIndex
         switch selectedSegmentIndex {
@@ -38,7 +43,7 @@ class CurrencyConversionViewController: UIViewController {
         case 1:
             displayViewController(CompareViewController())
         default:
-            displayViewController(ConvertViewController())
+            displayViewController(CompareViewController())
         }
     }
 

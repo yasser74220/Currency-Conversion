@@ -12,10 +12,11 @@ import Lottie
 extension UIViewController {
     @objc func validator ( textField:UITextField){
           let rgx = NSPredicate(format:"SELF MATCHES %@", "[+-]?([0-9]*[.])?[0-9]+")
-          var animationView: LottieAnimationView?
+         var animationView: LottieAnimationView?
+
           if (rgx.evaluate(with: textField.text)){
               animationView = .init(name: "valid")
-              animationView?.frame =  textField.frame.offsetBy(dx: 65, dy: 50)
+              animationView?.frame =  textField.frame.offsetBy(dx: textField.frame.width / 2 + 10, dy: textField.frame.height / 2 + 25)
               animationView?.loopMode = .playOnce
               view.addSubview(animationView!)
               animationView?.reloadImages()
@@ -26,7 +27,7 @@ extension UIViewController {
           }
           else {
               animationView = .init(name: "invalid")
-              animationView?.frame =  textField.frame.offsetBy(dx: 65, dy: 50)
+              animationView?.frame =  textField.frame.offsetBy(dx: textField.frame.width / 2 + 10, dy: textField.frame.height / 2 + 25)
               animationView?.loopMode = .repeat(2)
               view.addSubview(animationView!)
               animationView?.reloadImages()

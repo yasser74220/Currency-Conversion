@@ -26,9 +26,10 @@ struct Design {
             var animationView: LottieAnimationView?
             animationView = .init(name: "emptyList")
             animationView?.frame = collectionView.frame
-            animationView?.loopMode = .repeat(3)
+            animationView?.loopMode = .playOnce
             view.addSubview(animationView!)
             animationView?.play()
+            
         }
         static func getItems(collectionView: UICollectionView) -> [FavoriteList] {
             do {

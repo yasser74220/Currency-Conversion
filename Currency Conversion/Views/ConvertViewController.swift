@@ -5,107 +5,103 @@
 //  Created by Yasser Mohamed on 23/08/2023.
 //
 
-import UIKit
 import iOSDropDown
-import SDWebImage
 import Lottie
+import SDWebImage
+import UIKit
+
 class ConvertViewController: UIViewController {
-    @IBOutlet weak var sourceDropDownMenu: DropDown!
-    @IBOutlet weak var targetDropDownMenu: DropDown!
-    @IBOutlet weak var convertButton: UIButton!
-    @IBOutlet weak var resultTextField: UITextField!
-    @IBOutlet weak var amountTextField: UITextField!
-    @IBOutlet weak var addToFavoritesStackView: UIStackView!
-    @IBOutlet weak var exchangeRateCollectionView: UICollectionView!
-    
+    //MARK: - OUTLETS
+    @IBOutlet var sourceDropDownMenu: DropDown!
+    @IBOutlet var targetDropDownMenu: DropDown!
+    @IBOutlet var convertButton: UIButton!
+    @IBOutlet var resultTextField: UITextField!
+    @IBOutlet var amountTextField: UITextField!
+    @IBOutlet var addToFavoritesStackView: UIStackView!
+    @IBOutlet var exchangeRateCollectionView: UICollectionView!
+    //MARK: - OUTLETS
     lazy var viewModel = ConvertViewModel()
     var favoriteCurrencies = [FavoriteList]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initialUI()
-     
-        viewModel.getCurrencies() {[self] threeCode,countries,flags,_   in
+        
+        viewModel.getCurrencies { [self] _, _, _, _ in
             sourceDropDownMenu.optionArray = viewModel.getOpthioArrayForDropDown()
-           targetDropDownMenu.optionArray = viewModel.getOpthioArrayForDropDown()
+            targetDropDownMenu.optionArray = viewModel.getOpthioArrayForDropDown()
             sourceDropDownMenu.text = viewModel.getOpthioArrayForDropDown()[0]
             targetDropDownMenu.text = viewModel.getOpthioArrayForDropDown()[1]
             sourceDropDownMenu.selectedIndex = 0
             targetDropDownMenu.selectedIndex = 1
-            }
-        
+        }
+
         exchangeRateCollectionView.register(UINib(nibName: "ExchangeRateCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ExchangeRateCollectionViewCell")
         exchangeRateCollectionView.register(UINib(nibName: "ExchangeRateHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ExchangeRateHeaderCollectionReusableView")
         exchangeRateCollectionView.dataSource = self
         exchangeRateCollectionView.delegate = self
         addToFavoritesStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goToFavorites(_:))))
-        amountTextField.addTarget(self, action: #selector(validator), for: .allEvents)
+        amountTextField.addTarget(self, action: #selector(validator), for: .editingDidEnd)
         favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
-      
     }
-   
-    override func viewDidAppear(_ animated: Bool) {
-        DispatchQueue.main.async { [self] in
+ 
+    override func viewWillLayoutSubviews() {
+        if favoriteCurrencies.count == 0 {
+            favoriteCurrencies = CurrencyList.favoriteList
+        } else {
             favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
         }
     }
+ 
    
+    
     @IBAction func convertButtonTapped(_ sender: UIButton) {
-                guard let source = sourceDropDownMenu.selectedIndex, let target = targetDropDownMenu.selectedIndex, let amount = amountTextField.text else { return }
-                
-        self.viewModel.getConversionResult(amount: amount, source: CurrencyList.threeCode[source], target: CurrencyList.threeCode[target], completion: { value, error in
-            
-                    DispatchQueue.main.async {
-                       
-                        self.resultTextField.text = value
-                    }
-                })
-        
-    }
+        guard let source = sourceDropDownMenu.selectedIndex, let target = targetDropDownMenu.selectedIndex, let amount = amountTextField.text else { return }
 
+        viewModel.getConversionResult(amount: amount, source: CurrencyList.threeCode[source], target: CurrencyList.threeCode[target], completion: { value, _ in
+
+            DispatchQueue.main.async {
+                self.resultTextField.text = value
+            }
+        })
+    }
 }
 
-
 extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if favoriteCurrencies.count == 0 {
             Design.Functions.emptyListLottie(collectionView: collectionView, view: view)
-            return favoriteCurrencies.count
+            
+            return 0
         } else {
             return favoriteCurrencies.count
-
         }
-         
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: collectionView.frame.width, height: 65)
-       
     }
 
-   
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 65)
+    }
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExchangeRateCollectionViewCell", for: indexPath) as! ExchangeRateCollectionViewCell
-            cell.setCellData(name: favoriteCurrencies[indexPath.row].currencyName!, value: favoriteCurrencies[indexPath.row].currencyCode!, image: favoriteCurrencies[indexPath.row].currencyFlagUrl! ,code: favoriteCurrencies[indexPath.row].currencyName!)
-       
+        cell.setCellData(name: favoriteCurrencies[indexPath.row].currencyName!, value: favoriteCurrencies[indexPath.row].currencyCode!, image: favoriteCurrencies[indexPath.row].currencyFlagUrl!, code: favoriteCurrencies[indexPath.row].currencyName!)
+
         return cell
     }
-    
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
-        
     }
+
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ExchangeRateHeaderCollectionReusableView", for: indexPath) as! ExchangeRateHeaderCollectionReusableView
         header.label.text = "My Portofolio"
         return header
     }
-
 }
-extension ConvertViewController{
-    func initialUI()  {
+
+extension ConvertViewController {
+    func initialUI() {
         amountTextField.layer.borderWidth = Design.Measurments.borderWidth
         amountTextField.layer.cornerRadius = Design.Measurments.cornerRaduis
         amountTextField.layer.borderColor = Design.Colors.lightGrey
@@ -126,3 +122,16 @@ extension ConvertViewController{
         addToFavoritesStackView.isLayoutMarginsRelativeArrangement = true
     }
 }
+
+// override func viewWillAppear(_ animated: Bool) {
+//
+//            super.viewWillAppear(animated)
+//            self.exchangeRateCollectionView.reloadData()
+//
+//    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        DispatchQueue.main.async { [self] in
+//            favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
+//        }
+//
+//    }

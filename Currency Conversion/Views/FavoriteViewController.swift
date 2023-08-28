@@ -9,7 +9,7 @@ import UIKit
 
 class FavoriteViewController: UIViewController {
     @IBOutlet var favoriteCollectionView: UICollectionView!
-    
+
     lazy var viewModel = ConvertViewModel()
     lazy var favoriteViewModel = FavoriteViewModel()
     var favoriteCurrencies = CurrencyList.favoriteList
@@ -22,17 +22,16 @@ class FavoriteViewController: UIViewController {
         favoriteCollectionView.register(UINib(nibName: "ExchangeRateHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ExchangeRateHeaderCollectionReusableView")
         getItems()
     }
-
+ 
     func getItems() {
-        viewModel.getCurrencies { threecode, countries, flags,_  in
-            
+        viewModel.getCurrencies { threecode, countries, flags, _ in
+
         }
-            favoriteCurrencies = Design.Functions.getItems(collectionView: favoriteCollectionView)
+        favoriteCurrencies = Design.Functions.getItems(collectionView: favoriteCollectionView)
     }
 
 }
  
-
 extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         CurrencyList.countries.count
@@ -40,10 +39,10 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavouriteCollectionViewCell", for: indexPath) as! FavouriteCollectionViewCell
-        cell.setCellData(name: CurrencyList.threeCode[indexPath.item], value: CurrencyList.countries[indexPath.item], image: CurrencyList.flags[indexPath.item],buttonTag: indexPath.item)
+        cell.setCellData(name: CurrencyList.threeCode[indexPath.item], value: CurrencyList.countries[indexPath.item], image: CurrencyList.flags[indexPath.item], buttonTag: indexPath.item)
         cell.checkFavorite(favoriteCurrencies: favoriteCurrencies, indexPath: indexPath)
         cell.btnTapAction = { [self]
-           () in
+            () in
             favoriteViewModel.updateFavoriteList(cell: cell, favoriteCurrencies: favoriteCurrencies, indexPath: indexPath)
             favoriteCurrencies = try! Design.Shared.persistentContainerContext.fetch(FavoriteList.fetchRequest())
 
@@ -61,5 +60,5 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
         return CGSize(width: collectionView.frame.width, height: 65)
     }
 
- 
+
 }

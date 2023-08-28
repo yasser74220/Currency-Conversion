@@ -10,8 +10,10 @@ import UIKit
 
 extension UIViewController {
     @objc func goToFavorites(_ sender: UITapGestureRecognizer? = nil) {
-        let vc = FavoriteViewController() //change this to your class na
+        let vc = FavoriteViewController()
+        vc.modalPresentationStyle = .formSheet //change this to your class na
         self.present(vc, animated: true)
+    
     }
    
 }

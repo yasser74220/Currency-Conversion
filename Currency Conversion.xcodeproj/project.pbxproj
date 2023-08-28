@@ -24,6 +24,7 @@
 		4D55AC3F2A933B8100B77E10 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55AC3E2A933B8100B77E10 /* ApiService.swift */; };
 		4D5A134E2A997F070081C03D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5A134D2A997F070081C03D /* Constants.swift */; };
 		4D5A13502A9980D30081C03D /* UIViewController+GoToFavorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5A134F2A9980D30081C03D /* UIViewController+GoToFavorites.swift */; };
+		4D65DE4D2A9BE0CF00D6B91A /* UIViewController+HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D65DE4C2A9BE0CF00D6B91A /* UIViewController+HideKeyboard.swift */; };
 		4D7F2F4C2A9B68290021DD90 /* UiViewController+TextFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7F2F4B2A9B68290021DD90 /* UiViewController+TextFieldValidator.swift */; };
 		4D8F3EBD2A94C6FF001454DC /* PairConversionDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8F3EBC2A94C6FF001454DC /* PairConversionDataModel.swift */; };
 		4D8F3EC42A94E596001454DC /* ConversionRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8F3EC32A94E596001454DC /* ConversionRepo.swift */; };
@@ -66,6 +67,7 @@
 		4D55AC3E2A933B8100B77E10 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		4D5A134D2A997F070081C03D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4D5A134F2A9980D30081C03D /* UIViewController+GoToFavorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+GoToFavorites.swift"; sourceTree = "<group>"; };
+		4D65DE4C2A9BE0CF00D6B91A /* UIViewController+HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+HideKeyboard.swift"; sourceTree = "<group>"; };
 		4D7F2F4B2A9B68290021DD90 /* UiViewController+TextFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiViewController+TextFieldValidator.swift"; sourceTree = "<group>"; };
 		4D8F3EBC2A94C6FF001454DC /* PairConversionDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairConversionDataModel.swift; sourceTree = "<group>"; };
 		4D8F3EC32A94E596001454DC /* ConversionRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionRepo.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				4D5A134D2A997F070081C03D /* Constants.swift */,
 				4D5A134F2A9980D30081C03D /* UIViewController+GoToFavorites.swift */,
 				4D7F2F4B2A9B68290021DD90 /* UiViewController+TextFieldValidator.swift */,
+				4D65DE4C2A9BE0CF00D6B91A /* UIViewController+HideKeyboard.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				4DEA106D2A98E4CE00B0BCCE /* FavoriteCoreDataModel.xcdatamodeld in Sources */,
 				4DD7B0902A96599F00860561 /* ConvertViewController.swift in Sources */,
 				4D46D48A2A97FDCB008FAAC5 /* FavouriteCollectionViewCell.swift in Sources */,
+				4D65DE4D2A9BE0CF00D6B91A /* UIViewController+HideKeyboard.swift in Sources */,
 				4D4AA55F2A96E77000AA1C5A /* ExchangeRateHeaderCollectionReusableView.swift in Sources */,
 				4DB6EA262A9AC69F0084D274 /* FavoriteViewModel.swift in Sources */,
 				4D46D4832A97FA55008FAAC5 /* FavoriteButton.swift in Sources */,

@@ -15,8 +15,8 @@ class FavoriteButton: UIButton {
         }
     }
 
-    var filledIcon = UIImage(systemName: "heart.fill")
-    var basicIcon = UIImage(systemName: "heart")
+    var filledIcon = UIImage(named: "radio.fill")
+    var basicIcon = UIImage(named: "radio")
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
