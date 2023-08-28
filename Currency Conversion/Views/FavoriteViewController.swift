@@ -56,7 +56,7 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
         header.btnTapAction = { [self]
             () in
             self.dismiss(animated: true, completion: nil)
-            NotificationCenter.default.post(name: Notification.Name("FavoritesList"), object: nil)
+            NotificationCenter.default.post(name: Notification.Name("FavoritesList"), object: favoriteCurrencies)
         }
         return header
     }

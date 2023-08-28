@@ -50,9 +50,9 @@ class ConvertViewController: UIViewController {
         favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
     }
     @objc func methodOfReceivedNotification(notification: Notification) {
-    
+          
             favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
- 
+         
     }
 
    
@@ -62,8 +62,10 @@ class ConvertViewController: UIViewController {
 
         viewModel.getConversionResult(amount: amount, source: CurrencyList.threeCode[source], target: CurrencyList.threeCode[target], completion: { value, _ in
 
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [self] in
                 self.resultTextField.text = value
+                favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
+
             }
         })
     }
@@ -86,8 +88,8 @@ extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDel
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExchangeRateCollectionViewCell", for: indexPath) as! ExchangeRateCollectionViewCell
-        cell.setCellData(name: favoriteCurrencies[indexPath.row].currencyName!, value: favoriteCurrencies[indexPath.row].currencyCode!, image: favoriteCurrencies[indexPath.row].currencyFlagUrl!, code: favoriteCurrencies[indexPath.row].currencyName!)
-
+        cell.setCellData(name: favoriteCurrencies[indexPath.row].currencyName!, value: "1.25", image: favoriteCurrencies[indexPath.row].currencyFlagUrl!, code: favoriteCurrencies[indexPath.row].currencyName!)
+        
         return cell
     }
 

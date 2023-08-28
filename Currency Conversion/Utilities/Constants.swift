@@ -28,8 +28,12 @@ struct Design {
             animationView?.frame = collectionView.frame
             animationView?.loopMode = .playOnce
             view.addSubview(animationView!)
-            animationView?.play{_ in
-                animationView?.isHidden = true
+            animationView?.play{finish in
+                if !CurrencyList.favoriteList.isEmpty
+                {
+                    animationView?.isHidden = true
+ 
+                }
             }
             
         }
