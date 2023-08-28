@@ -54,8 +54,7 @@ class ConvertViewController: UIViewController {
             favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
  
     }
-   
-  
+
    
     
     @IBAction func convertButtonTapped(_ sender: UIButton) {
