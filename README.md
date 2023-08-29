@@ -57,7 +57,7 @@ Technologies used in the project:
 *   AlamoFire
 *   CoreData
 *   Lottie Animations
-*   Lottie Animations
+*   MVVM
 
 <h2>🛡️ License:</h2>
 
