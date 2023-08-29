@@ -5,7 +5,7 @@
 <h2>Project Screenshots:</h2>
 
 
-<img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3150.PNG" alt="project-screenshot" width="400" height="400/">
+<img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3150.PNG" alt="project-screenshot" >
   
   
 <h2>🧐 Features</h2>
