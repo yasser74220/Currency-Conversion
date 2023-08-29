@@ -82,7 +82,7 @@ extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDel
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExchangeRateCollectionViewCell", for: indexPath) as! ExchangeRateCollectionViewCell
-        cell.setCellData(name: favoriteCurrencies[indexPath.row].currencyName!, value: "1.25", image: favoriteCurrencies[indexPath.row].currencyFlagUrl!, code: favoriteCurrencies[indexPath.row].currencyName!)
+        cell.setCellData(name: favoriteCurrencies[indexPath.row].currencyCode!, value: "1.25", image: favoriteCurrencies[indexPath.row].currencyFlagUrl!, code: favoriteCurrencies[indexPath.row].currencyName!)
         
         return cell
     }
