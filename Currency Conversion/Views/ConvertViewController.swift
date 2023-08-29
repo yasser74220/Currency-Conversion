@@ -50,7 +50,7 @@ class ConvertViewController: UIViewController {
         favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
     }
     @objc func methodOfReceivedNotification(notification: Notification) {
-          
+
             favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
          
     }
