@@ -48,3 +48,8 @@ Technologies used in the project:
 *   AlamoFire
 *   CoreData
 *   Lottie Animations
+*   Lottie Animations
+
+<h2>🛡️ License:</h2>
+
+This project is licensed under the \[MIT License\](LICENSE)
