@@ -43,6 +43,12 @@ class ConvertViewModel {
             completion((result.conversionRate1.description,result.conversionRate2.description),error)
         }
     }
+    func getFavoriteExchangeRate(amount: String, favorite: String,source:String,completion: @escaping (ExchangeDataModel, Error?) -> ()) {
+        pairCurrencyService.getExchange(amount: amount, Favorites: favorite,source:source)    {response,error in
+            guard let result = response else { return }
+            completion(result,error)
+        }
+    }
     func getOpthioArrayForDropDown() -> [String]{
         var optionArray = [String]()
         for flag in CurrencyList.threeCode {

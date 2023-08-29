@@ -24,6 +24,7 @@
 		4D55AC3F2A933B8100B77E10 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D55AC3E2A933B8100B77E10 /* ApiService.swift */; };
 		4D5A134E2A997F070081C03D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5A134D2A997F070081C03D /* Constants.swift */; };
 		4D5A13502A9980D30081C03D /* UIViewController+GoToFavorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5A134F2A9980D30081C03D /* UIViewController+GoToFavorites.swift */; };
+		4D61A3772A9E279B004BE2A3 /* ExchangeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D61A3762A9E279B004BE2A3 /* ExchangeDataModel.swift */; };
 		4D65DE4D2A9BE0CF00D6B91A /* UIViewController+HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D65DE4C2A9BE0CF00D6B91A /* UIViewController+HideKeyboard.swift */; };
 		4D7F2F4C2A9B68290021DD90 /* UiViewController+TextFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7F2F4B2A9B68290021DD90 /* UiViewController+TextFieldValidator.swift */; };
 		4D8F3EBD2A94C6FF001454DC /* PairConversionDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8F3EBC2A94C6FF001454DC /* PairConversionDataModel.swift */; };
@@ -71,6 +72,7 @@
 		4D55AC3E2A933B8100B77E10 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		4D5A134D2A997F070081C03D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4D5A134F2A9980D30081C03D /* UIViewController+GoToFavorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+GoToFavorites.swift"; sourceTree = "<group>"; };
+		4D61A3762A9E279B004BE2A3 /* ExchangeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeDataModel.swift; sourceTree = "<group>"; };
 		4D65DE4C2A9BE0CF00D6B91A /* UIViewController+HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+HideKeyboard.swift"; sourceTree = "<group>"; };
 		4D7F2F4B2A9B68290021DD90 /* UiViewController+TextFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiViewController+TextFieldValidator.swift"; sourceTree = "<group>"; };
 		4D8F3EBC2A94C6FF001454DC /* PairConversionDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairConversionDataModel.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				4D8F3EBC2A94C6FF001454DC /* PairConversionDataModel.swift */,
 				4DB839D82A95F57B0048532C /* CurrenciesDataModel.swift */,
 				4DB8D90A2A9CE7F7003673EA /* CompareDataModel.swift */,
+				4D61A3762A9E279B004BE2A3 /* ExchangeDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				4D5A134E2A997F070081C03D /* Constants.swift in Sources */,
 				4DB839D92A95F57B0048532C /* CurrenciesDataModel.swift in Sources */,
 				4D55AC3F2A933B8100B77E10 /* ApiService.swift in Sources */,
+				4D61A3772A9E279B004BE2A3 /* ExchangeDataModel.swift in Sources */,
 				4D55AC252A93326E00B77E10 /* AppDelegate.swift in Sources */,
 				4DB6EA242A9AC4790084D274 /* CoreDataService.swift in Sources */,
 				4DB8D90D2A9CEA45003673EA /* SegmantedControl.swift in Sources */,

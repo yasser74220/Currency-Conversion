@@ -22,11 +22,13 @@ class ConvertViewController: UIViewController {
     //MARK: - Variables
     lazy var viewModel = ConvertViewModel()
     var favoriteCurrencies = [FavoriteList]()
+    var favoriteCurrenciesExchange: [String] = ["1","1","1","1","1","1","1","1","1","1","1","1","1"]
     
     //MARK: - ViewDidload
     override func viewDidLoad() {
         super.viewDidLoad()
         initialUI()
+        
         // Fetch Currencies and fill dropdown menu with it
         viewModel.getCurrencies { [self] _, _, _, _ in
             sourceDropDownMenu.optionArray = viewModel.getOpthioArrayForDropDown()
@@ -35,6 +37,7 @@ class ConvertViewController: UIViewController {
             targetDropDownMenu.text = viewModel.getOpthioArrayForDropDown()[1]
             sourceDropDownMenu.selectedIndex = 0
             targetDropDownMenu.selectedIndex = 1
+         
         }
       
         exchangeRateCollectionView.register(UINib(nibName: "ExchangeRateCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ExchangeRateCollectionViewCell")
@@ -46,21 +49,23 @@ class ConvertViewController: UIViewController {
         
         amountTextField.addTarget(self, action: #selector(validator), for: .editingDidEnd)
         NotificationCenter.default.addObserver(self, selector: #selector(methodOfReceivedNotification(notification:)), name: Notification.Name("FavoritesList"), object: nil)
-
+        
         favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
     }
     @objc func methodOfReceivedNotification(notification: Notification) {
+         favoriteCurrenciesExchange =  ["1","1","1","1","1","1","1","1","1","1","1","1","1"]
 
-            favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
-         
+        handleExchangeForFavorite()
+        favoriteCurrencies = Design.Functions.getItems(collectionView: exchangeRateCollectionView)
+
     }
 
    
     
     @IBAction func convertButtonTapped(_ sender: UIButton) {
-      
+        handleExchangeForFavorite()
         handlingConverButton()
-      
+ 
     }
     
 }
@@ -82,8 +87,8 @@ extension ConvertViewController: UICollectionViewDataSource, UICollectionViewDel
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExchangeRateCollectionViewCell", for: indexPath) as! ExchangeRateCollectionViewCell
-        cell.setCellData(name: favoriteCurrencies[indexPath.row].currencyCode!, value: "1.25", image: favoriteCurrencies[indexPath.row].currencyFlagUrl!, code: favoriteCurrencies[indexPath.row].currencyName!)
-        
+        cell.setCellData(name: favoriteCurrencies[indexPath.row].currencyCode!, value: favoriteCurrenciesExchange[indexPath.row] , image: favoriteCurrencies[indexPath.row].currencyFlagUrl!, code: favoriteCurrencies[indexPath.row].currencyName!)
+      
         return cell
     }
 
@@ -141,9 +146,42 @@ extension ConvertViewController {
                    
                     DispatchQueue.main.async { [self] in
                         self.resultTextField.text = value
-                
+                        exchangeRateCollectionView.reloadData()
+
                     }
                 })
+
+            }
+        }
+    }
+    func handleExchangeForFavorite(){
+        Task{
+            var favorite:[String] = []
+            for currency in favoriteCurrencies {
+                
+                favorite.append(currency.currencyCode ?? "")
+            }
+            var string: String?
+              for element in favorite {
+                  if string == nil {
+                      string = element
+                  } else {
+                  string = string! + "," + element
+                  }
+              }
+            viewModel.getFavoriteExchangeRate(amount: amountTextField.text ?? "1", favorite: string ?? "",source: CurrencyList.threeCode[sourceDropDownMenu.selectedIndex!]){ [self]response, error in
+                favoriteCurrenciesExchange.removeAll()
+
+                for x in response{
+                    favoriteCurrenciesExchange.append(x.conversionRate)
+                    
+                }
+               print(favoriteCurrenciesExchange)
+                
+            }
+            DispatchQueue.main.async { [self] in
+                
+                exchangeRateCollectionView.reloadData()
 
             }
         }
