@@ -2,6 +2,10 @@
 
 <p id="description">Currency Conversion: The core functionality of the app is to allow users to convert between different currencies. Users can enter the amount they want to convert select the source currency and choose the target currency. The app will display the converted amount based on the current exchange rate.</p>
 
+<h2>Project Screenshots:</h2>
+
+<img src="https://drive.google.com/file/d/16aIv37kTGiJcfhXfzZ_qBXu4p0qmBYKY/view?usp=sharing" alt="project-screenshot" width="400" height="400/">
+
   
   
 <h2>🧐 Features</h2>
@@ -52,4 +56,4 @@ Technologies used in the project:
 
 <h2>🛡️ License:</h2>
 
-This project is licensed under the [MIT License](LICENSE)
+This project is licensed under the \[MIT License\](LICENSE)
