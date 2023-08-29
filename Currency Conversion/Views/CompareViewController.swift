@@ -7,6 +7,7 @@
 
 import UIKit
 import iOSDropDown
+import Lottie
 class CompareViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var secondTargetResultTextField: UITextField!
@@ -26,7 +27,7 @@ class CompareViewController: UIViewController {
     }
   
     @IBAction func compareButtonTapped(_ sender: Any) {
-        
+        handleCompareButton()
     }
     
 }
@@ -53,6 +54,36 @@ extension CompareViewController {
         sourceDropDownMenu.selectedIndex = 0
         firstTargetDropDownMenu.selectedIndex = 1
         secondTargetDropDownMenu.selectedIndex = 2
+    }
+    func handleCompareButton() {
+         
+            var animationView: LottieAnimationView?
+            animationView = .init(name: "loading")
+            animationView?.frame = CompareButton.frame
+            animationView?.backgroundColor = .white
+            animationView?.loopMode = .playOnce
+            view.addSubview(animationView!)
+            animationView?.play{ [self] finish in
+                animationView?.isHidden = true
+
+                if ((amountTextField.text!.isEmpty)) {
+                    validator(textField: amountTextField)
+
+                }
+                else {
+                    guard let source = sourceDropDownMenu.selectedIndex, let target1 = firstTargetDropDownMenu.selectedIndex,let target2 = secondTargetDropDownMenu.selectedIndex else { return }
+                    viewModel.getConversionResultForCompare(amount: amountTextField.text!, source: CurrencyList.threeCode[source], target1: CurrencyList.threeCode[target1], target2: CurrencyList.threeCode[target2], completion:  { value,error in
+                       
+                        DispatchQueue.main.async { [self] in
+                            self.firstTargetResultTextField.text = value.0
+                            self.secondTargetResultTextField.text = value.1
+                    
+                        }
+                    })
+
+                }
+            }
+ 
     }
 }
 

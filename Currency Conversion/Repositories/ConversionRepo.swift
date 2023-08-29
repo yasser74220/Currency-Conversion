@@ -10,11 +10,23 @@ import Alamofire
 
 protocol CurrencyConversionRepoProtocol {
     func getConversion(amount:String, source:String, target:String, completion: @escaping (PairConversion?, Error?) -> () )
+    func getCompare(amount: String, source: String, target1: String, target2: String, completion: @escaping (CompareConversion?, Error?) -> () )
     func getCurrencies(completion: @escaping (Currencies?, Error?) -> () )
 
 }
 
 class CurrencyConversionRepo: CurrencyConversionRepoProtocol {
+    func getCompare(amount: String, source: String, target1: String, target2: String,  completion: @escaping (CompareConversion?, Error?) -> ()) {
+        ApiService.shared.getData(url: Design.EndPoints.Compare+"/\(source)/\(target1)/\(target2)/\(amount)", method: HTTPMethod.get, parameters: [:], encodingType: URLEncoding.default, headers: [:]) { (Response: CompareConversion?, Error: Error?) in
+            if let returnedResponse = Response {
+                completion(returnedResponse,nil)
+            } else {
+                completion(nil,Error)
+                print(Error as Any)
+            }
+        }
+    }
+    
   
     func getCurrencies(completion: @escaping (Currencies?, Error?) -> ()) {
         ApiService.shared.getData(url: Design.EndPoints.Currencies, method: HTTPMethod.get, parameters: [:], encodingType: URLEncoding.default, headers: [:]) { (Response: Currencies?, Error: Error?) in

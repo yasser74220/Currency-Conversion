@@ -6,7 +6,9 @@
 //
 
 import Foundation
-
-class Compare:Codable {
-    
+ 
+// MARK: - CompareConversion
+struct CompareConversion: Codable {
+    let base, firstTarget, secondTarget, amount: String
+    let conversionRate1, conversionRate2: String
 }

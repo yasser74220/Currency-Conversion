@@ -36,7 +36,7 @@ class ConvertViewController: UIViewController {
             sourceDropDownMenu.selectedIndex = 0
             targetDropDownMenu.selectedIndex = 1
         }
-
+      
         exchangeRateCollectionView.register(UINib(nibName: "ExchangeRateCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ExchangeRateCollectionViewCell")
         exchangeRateCollectionView.register(UINib(nibName: "ExchangeRateHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ExchangeRateHeaderCollectionReusableView")
         exchangeRateCollectionView.dataSource = self
@@ -58,32 +58,8 @@ class ConvertViewController: UIViewController {
    
     
     @IBAction func convertButtonTapped(_ sender: UIButton) {
-        var animationView: LottieAnimationView?
-        animationView = .init(name: "loading")
-        animationView?.frame = sender.frame
-        animationView?.backgroundColor = .white
-        animationView?.loopMode = .playOnce
-        view.addSubview(animationView!)
-        animationView?.play{ [self] finish in
-            animationView?.isHidden = true
-
-            if ((amountTextField.text!.isEmpty)) {
-                validator(textField: amountTextField)
-
-            }
-            else {
-                guard let source = sourceDropDownMenu.selectedIndex, let target = targetDropDownMenu.selectedIndex else { return }
-                viewModel.getConversionResult(amount: amountTextField.text!, source: CurrencyList.threeCode[source], target: CurrencyList.threeCode[target], completion: { value, error in
-                   
-                    DispatchQueue.main.async { [self] in
-                        self.resultTextField.text = value
-                
-                    }
-                })
-
-            }
-        }
-        
+      
+        handlingConverButton()
       
     }
     
@@ -144,5 +120,32 @@ extension ConvertViewController {
         addToFavoritesStackView.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         addToFavoritesStackView.layer.borderColor = UIColor.black.cgColor
         addToFavoritesStackView.isLayoutMarginsRelativeArrangement = true
+    }
+    func handlingConverButton() {
+        var animationView: LottieAnimationView?
+        animationView = .init(name: "loading")
+        animationView?.frame = convertButton.frame
+        animationView?.backgroundColor = .white
+        animationView?.loopMode = .playOnce
+        view.addSubview(animationView!)
+        animationView?.play{ [self] finish in
+            animationView?.isHidden = true
+
+            if ((amountTextField.text!.isEmpty)) {
+                validator(textField: amountTextField)
+
+            }
+            else {
+                guard let source = sourceDropDownMenu.selectedIndex, let target = targetDropDownMenu.selectedIndex else { return }
+                viewModel.getConversionResult(amount: amountTextField.text!, source: CurrencyList.threeCode[source], target: CurrencyList.threeCode[target], completion: { value, error in
+                   
+                    DispatchQueue.main.async { [self] in
+                        self.resultTextField.text = value
+                
+                    }
+                })
+
+            }
+        }
     }
 }

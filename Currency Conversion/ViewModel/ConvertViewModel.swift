@@ -37,6 +37,12 @@ class ConvertViewModel {
             completion(result.conversionRate.description,error)
         }
     }
+    func getConversionResultForCompare(amount: String, source: String, target1: String, target2: String,completion: @escaping ((String,String), Error?) -> ()) {
+        pairCurrencyService.getCompare(amount: amount, source: source, target1: target1, target2: target2) {response,error in
+            guard let result = response else { return }
+            completion((result.conversionRate1.description,result.conversionRate2.description),error)
+        }
+    }
     func getOpthioArrayForDropDown() -> [String]{
         var optionArray = [String]()
         for flag in CurrencyList.threeCode {

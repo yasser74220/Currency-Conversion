@@ -8,6 +8,7 @@
 import Alamofire
 import iOSDropDown
 import UIKit
+import Lottie
 class CurrencyConversionViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet var scrollView: UIScrollView!
@@ -19,12 +20,12 @@ class CurrencyConversionViewController: UIViewController {
 
      override func viewDidLoad() {
         super.viewDidLoad()
+     
          viewModel.getCurrencies() {  threeCode,countries,flags,error in
              CurrencyList.countries = countries
              CurrencyList.threeCode = threeCode
              CurrencyList.flags = flags
             }
- 
          segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .allEvents)
  
          displayViewController(ConvertViewController())
