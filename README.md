@@ -4,10 +4,12 @@
 
 <h2>Project Screenshots:</h2>
 
-
-<img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3150.PNG" alt="project-screenshot" >
-  
-  
+<img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3150.PNG" alt="project-screenshot" width="200">  
+<img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3152.PNG" alt="project-screenshot" width="200"> 
+<img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3153.PNG" alt="project-screenshot" width="200"> 
+<img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3157.PNG" alt="project-screenshot" width="200"> 
+<img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3158.PNG" alt="project-screenshot" width="200"> 
+<img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3159.PNG" alt="project-screenshot" width="200"> 
 <h2>🧐 Features</h2>
 
 Here're some of the project's best features:
