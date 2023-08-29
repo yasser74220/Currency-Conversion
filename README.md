@@ -9,8 +9,8 @@
 <img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3152.PNG" alt="project-screenshot" width="200"> 
 <img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3153.PNG" alt="project-screenshot" width="200"> 
 <img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3157.PNG" alt="project-screenshot" width="200"> 
-<img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3160.PNG" alt="project-screenshot" width="200"> 
-<img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3161.PNG" alt="project-screenshot" width="200"> 
+<img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3160.png" alt="project-screenshot" width="200"> 
+<img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3161.png" alt="project-screenshot" width="200"> 
 <img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3158.PNG" alt="project-screenshot" width="200"> 
 <img src="https://github.com/yasser74220/Currency-Conversion/blob/main/Screens/IMG_3159.PNG" alt="project-screenshot" width="200"> 
 </div>
